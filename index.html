@@ -1835,7 +1835,8 @@
     #works.is-pano .works-pano{display:block!important;width:100%;padding:18px 0 8px;position:relative;z-index:2}
     .works-pano-viewport{
       height:min(78vh,880px);overflow-x:auto;overflow-y:hidden;
-      cursor:grab;scrollbar-width:none;
+      cursor:grab;scrollbar-width:none;contain:layout;
+      -webkit-overflow-scrolling:touch;
     }
     .works-pano-viewport::-webkit-scrollbar{display:none}
     .works-pano-viewport.is-dragging{cursor:grabbing}
@@ -1844,6 +1845,7 @@
       display:flex;flex-direction:column;flex-wrap:wrap;
       align-content:flex-start;gap:6px;
       padding:0 var(--v9-pad, 28px);
+      contain:layout;
     }
     .works-pano-item{
       position:relative;flex:0 0 auto;padding:0;border:0;
@@ -1851,9 +1853,12 @@
       aspect-ratio:var(--ratio, 1);
       overflow:hidden;background:#171717;cursor:pointer;
       contain:layout paint;
+      content-visibility:auto;
+      contain-intrinsic-size:auto min(148px, 20vh);
     }
-    .works-pano-item[data-kind="portrait"]{height:min(302px,calc((100% - 6px) / 2))}
-    .works-pano-item img{display:block;width:100%;height:100%;object-fit:cover;filter:none}
+    .works-pano-item[data-kind="portrait"]{height:min(302px,calc((100% - 6px) / 2));contain-intrinsic-size:auto min(302px, 40vh)}
+    .works-pano-item img{display:block;width:100%;height:100%;object-fit:cover;filter:none;pointer-events:none;opacity:0;transition:opacity .28s ease}
+    .works-pano-item img.is-ready{opacity:1}
     .works-pano-bar{padding:24px var(--v9-pad,28px) 8px}
     .works-pano-slider{
       -webkit-appearance:none;appearance:none;
@@ -3099,6 +3104,7 @@
   <div class="toast" id="toast"></div>
 
   <script src="portfolio-data.js"></script>
+  <script src="thumb-meta.js"></script>
   <script>
     const $ = (s, r = document) => r.querySelector(s);
     const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -3708,12 +3714,21 @@
 
     /* V10 folder portfolios use the single shared portfolio-data.js source. */
     const portfolioData = window.PORTFOLIO_DATA || { aiProducts: [], renderProducts: [] };
-    const thumbSrc = src => {
+    const thumbMeta = window.THUMB_META || {};
+    const thumbSrc = (src, size) => {
+      if (!src) return src;
+      const kind = size === 's' ? 's' : 'm';
       const host = location.hostname;
       if (host === '127.0.0.1' || host === 'localhost') {
-        return `/api/img?path=${encodeURIComponent(src)}&max=2048`;
+        return `/api/img?path=${encodeURIComponent(src)}&max=${kind === 's' ? 720 : 1600}`;
       }
-      return src;
+      if (!src.startsWith('assets-v8/')) return src;
+      return src.replace(/^assets-v8\//, `assets-v8/thumbs/${kind}/`).replace(/\.(png|webp|jpe?g)$/i, '.jpg');
+    };
+    const srcRatio = src => {
+      const meta = thumbMeta[src];
+      if (!meta || !meta.h) return 1;
+      return meta.w / meta.h;
     };
     const folderDefs = { aiProducts: (portfolioData.aiProducts || []).slice(0, 5), renderProducts: (portfolioData.renderProducts || []).slice(0, 5) };
     const galleryItems = [];
@@ -3751,7 +3766,7 @@
     function folderCard(folder, group, colorIndex, duplicate = false) {
       const items = resolveFolderItems(folder).map(x => x.item);
       const first = items[0] || [folder.title, '', '', 'wide'];
-      const preview = first[2] ? `<span class="folder-preview"><img src="${thumbSrc(first[2])}" alt="${folder.title}" draggable="false" decoding="async"></span>` : '<span class="folder-preview folder-preview-empty"><i>EMPTY</i></span>';
+      const preview = first[2] ? `<span class="folder-preview"><img src="${thumbSrc(first[2], 'm')}" alt="${folder.title}" draggable="false" decoding="async"></span>` : '<span class="folder-preview folder-preview-empty"><i>EMPTY</i></span>';
       return `<button class="folder-card" data-group="${group}" data-folder="${folder.id}" data-duplicate="${duplicate}" style="--folder-gradient:${folderColors[colorIndex % folderColors.length]}" aria-label="打开${folder.title}文件夹"><span class="folder-front"><b class="folder-seq">${String(colorIndex + 1).padStart(2,'0')}</b><small>${group === 'aiProducts' ? 'AI VISUAL' : '3D RENDER'} / SELECTED PROJECT</small><h4>${folder.title}</h4></span>${preview}<span class="folder-open-mark">↘</span></button>`;
     }
     function closeFolderDrawer(drawer) {
@@ -3791,7 +3806,7 @@
       container.innerHTML = rawItems.map(item =>
         `<button type="button" class="item-wrapper work-card" data-key="${item.id}" data-index="${item.index}">
           <div class="item-img">
-            <img src="${thumbSrc(item.img)}" alt="${item.title || ''}" decoding="async">
+            <img src="${thumbSrc(item.img, 'm')}" alt="${item.title || ''}" loading="lazy" decoding="async">
             <span class="work-info"><span><b>${item.title || ''}</b></span><small>↗</small></span>
           </div>
         </button>`
@@ -3918,8 +3933,8 @@
       let view = 'category';
       let panoReady = false;
       let panoOrder = [];
-      let loadGen = 0;
-      const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+      let sliderActive = false;
+      let scrollRaf = 0;
       const shuffle = list => {
         const arr = list.slice();
         for (let i = arr.length - 1; i > 0; i -= 1) {
@@ -3932,70 +3947,56 @@
       function syncSlider() {
         const max = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
         slider.max = String(Math.max(1, Math.round(max)));
-        slider.value = String(Math.round(viewport.scrollLeft));
+        if (!sliderActive) slider.value = String(Math.round(viewport.scrollLeft));
         slider.disabled = max <= 2;
       }
-      function revealItem(el) {
-        if (typeof gsap === 'undefined') {
-          el.style.opacity = '1';
-          return;
-        }
-        gsap.fromTo(el, { opacity: 0, y: 36 }, {
-          opacity: 1, y: 0, duration: 0.45, ease: 'power2.out',
-          onComplete: () => { gsap.set(el, { clearProps: 'transform' }); }
+      const loader = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const img = entry.target;
+          const src = img.dataset.src;
+          if (!src) return;
+          img.src = src;
+          img.removeAttribute('data-src');
+          loader.unobserve(img);
         });
-      }
-      async function appendItem(index, gen) {
+      }, { root: viewport, rootMargin: '800px', threshold: 0.01 });
+      function appendItem(index) {
         const item = galleryItems[index];
         if (!item) return;
+        const ratio = srcRatio(item[2]);
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'works-pano-item';
         btn.dataset.index = String(index);
-        btn.style.setProperty('--ratio', '1');
+        btn.dataset.kind = kindOf(ratio);
+        btn.style.setProperty('--ratio', String(ratio));
         const img = document.createElement('img');
         img.alt = item[0] || '';
         img.decoding = 'async';
-        btn.style.opacity = '0';
+        img.draggable = false;
+        img.dataset.src = thumbSrc(item[2], 's');
+        img.addEventListener('load', () => img.classList.add('is-ready'), { once: true });
+        img.addEventListener('error', () => img.classList.add('is-ready'), { once: true });
         btn.appendChild(img);
-        track.appendChild(btn);
-        await new Promise(done => {
-          img.onload = done;
-          img.onerror = done;
-          img.src = thumbSrc(item[2]);
-        });
-        if (gen !== loadGen || view !== 'pano') return;
-        const ratio = (img.naturalWidth || 4) / Math.max(img.naturalHeight || 3, 1);
-        btn.style.setProperty('--ratio', String(ratio));
-        btn.dataset.kind = kindOf(ratio);
         btn.addEventListener('click', () => {
           if (viewport.dataset.suppressClick === '1') return;
           visible = panoOrder.slice();
           openLb(+btn.dataset.index);
         });
-        revealItem(btn);
-        syncSlider();
+        track.appendChild(btn);
+        loader.observe(img);
       }
-      async function renderPano() {
+      function renderPano() {
         if (panoReady) {
           requestAnimationFrame(syncSlider);
           return;
         }
-        const gen = ++loadGen;
         panoOrder = shuffle(galleryItems.map((_, i) => i));
         track.innerHTML = '';
+        panoOrder.forEach(appendItem);
         panoReady = true;
-        let cursor = 0;
-        const worker = async () => {
-          while (gen === loadGen && view === 'pano' && cursor < panoOrder.length) {
-            const index = panoOrder[cursor];
-            cursor += 1;
-            await appendItem(index, gen);
-            await wait(80);
-          }
-        };
-        worker();
-        worker();
+        requestAnimationFrame(syncSlider);
       }
       function setView(next) {
         view = next;
@@ -4009,14 +4010,22 @@
         const sub = $('.sec-head .sub', works);
         if (sub) sub.textContent = isPano ? '拖动底部滑块横向浏览全部作品' : '按产品类型查看项目';
         if (isPano) renderPano();
-        else loadGen += 1;
       }
       switcher.addEventListener('click', e => {
         const btn = e.target.closest('[data-works-view]');
         if (btn) setView(btn.dataset.worksView);
       });
+      slider.addEventListener('pointerdown', () => { sliderActive = true; });
+      slider.addEventListener('pointerup', () => { sliderActive = false; syncSlider(); });
+      slider.addEventListener('pointercancel', () => { sliderActive = false; });
       slider.addEventListener('input', () => { viewport.scrollLeft = Number(slider.value); });
-      viewport.addEventListener('scroll', syncSlider, { passive: true });
+      viewport.addEventListener('scroll', () => {
+        if (sliderActive || scrollRaf) return;
+        scrollRaf = requestAnimationFrame(() => {
+          scrollRaf = 0;
+          syncSlider();
+        });
+      }, { passive: true });
       addEventListener('resize', () => { if (view === 'pano') syncSlider(); });
       let down = false, moved = false, startX = 0, startLeft = 0;
       viewport.addEventListener('pointerdown', e => {
