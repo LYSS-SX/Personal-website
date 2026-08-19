@@ -2,3 +2,7 @@
 Thumbs.db
 *.bak
 *.tmp
+.asset-backups/
+.media-cache/
+*.uploading-*
+*.writing-*
