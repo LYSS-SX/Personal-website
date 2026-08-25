@@ -1916,7 +1916,10 @@
           if (wallBusy || hero.classList.contains('offstage')) return;
           wallBusy = true;
           wallGeneration += 1;
-          const nextSources = usable.filter(src => !currentSources.includes(src));
+          const available = usable.filter(src => !currentSources.includes(src));
+          const nextSources = Array.from({ length: Math.min(35, available.length) }, (_, index) =>
+            available[(index + wallGeneration * 11) % available.length]
+          );
           await preloadBatch(nextSources);
           const replaceIndices = [];
           for (let column = 0; column < cols; column += 1) {
