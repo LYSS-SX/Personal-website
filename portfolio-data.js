@@ -225,7 +225,28 @@ window.PORTFOLIO_DATA = {
       "id": "ai-06",
       "title": "儿童用品",
       "desc": "",
-      "images": []
+      "images": [
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-06/image-1787646965667-25qm1.jpg",
+          "title": "儿童用品",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-06/image-1787646965781-i6he3.jpg",
+          "title": "儿童用品",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-06/image-1787648453914-pu755.png",
+          "title": "儿童用品",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-06/image-1787648464234-d4dok.png",
+          "title": "儿童用品",
+          "ratio": "auto"
+        }
+      ]
     },
     {
       "id": "ai-04",
@@ -294,6 +315,36 @@ window.PORTFOLIO_DATA = {
         },
         {
           "src": "assets-v8/05-works/projects/aiProducts/ai-04/image-1787047212412-ts43q.jpg",
+          "title": "户外装备",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-04/image-1787654966103-v2iuv.jpg",
+          "title": "户外装备",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-04/image-1787654966119-qrjph.jpg",
+          "title": "户外装备",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-04/image-1787654966323-zuu4z.jpg",
+          "title": "户外装备",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-04/image-1787654966337-7zx85.jpg",
+          "title": "户外装备",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-04/image-1787654966348-4xt5o.jpg",
+          "title": "户外装备",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-04/image-1787654966357-otma5.jpg",
           "title": "户外装备",
           "ratio": "auto"
         }
@@ -653,7 +704,7 @@ window.PORTFOLIO_DATA = {
           "id": "default",
           "title": "学步车温馨室内",
           "before": "assets-v8/03-cases/editor/comparison-scene/before-1786636305495-hv5l4.png",
-          "after": "assets-v8/03-cases/editor/comparison-scene/after-1786636310271-uweqw.png",
+          "after": "assets-v8/03-cases/editor/comparison-scene-default/after-1787632548057-cfghq.png",
           "reference": "",
           "beforeLabel": "白模场景",
           "afterLabel": "最终合成",
@@ -667,28 +718,28 @@ window.PORTFOLIO_DATA = {
           "id": "option-02",
           "title": "冰箱融合",
           "before": "assets-v8/03-cases/editor/comparison-scene-option-02/before-1787539100618-ezsid.png",
-          "after": "assets-v8/03-cases/editor/comparison-scene-option-02/after-1787542100474-b37gj.png",
+          "after": "assets-v8/03-cases/editor/comparison-scene-option-02/after-1787638649755-ny30f.png",
           "reference": "",
           "beforeLabel": "渲染图+白膜",
           "afterLabel": "AI合成",
           "recipe": [
-            "输入",
-            "处理",
-            "结果"
+            "白模场景",
+            "产品渲染",
+            "最终合成效果图"
           ]
         },
         {
           "id": "option-03",
-          "title": "方案 03",
-          "before": "assets-v8/03-cases/editor/comparison-scene-option-03/before-1787621589646-b1n4h.png",
-          "after": "assets-v8/03-cases/editor/comparison-scene-option-03/after-1787621595916-sv42d.png",
+          "title": "儿童滑板车户外",
+          "before": "assets-v8/03-cases/editor/comparison-scene-option-03/before-1787632332013-ef7sj.png",
+          "after": "assets-v8/03-cases/editor/comparison-scene-option-03/after-1787632335578-e34bn.png",
           "reference": "",
-          "beforeLabel": "输入",
-          "afterLabel": "结果",
+          "beforeLabel": "白膜+产品",
+          "afterLabel": "AI合成",
           "recipe": [
-            "输入",
-            "处理",
-            "结果"
+            "白模场景",
+            "产品渲染",
+            "最终合成效果图"
           ]
         }
       ]
@@ -726,12 +777,26 @@ window.PORTFOLIO_DATA = {
           "before": "assets-v8/03-cases/editor/comparison-background-option-02/before-1787320978641-nctgj.png",
           "after": "assets-v8/03-cases/editor/comparison-background-option-02/after-1787320981401-wv1xf.png",
           "reference": "",
-          "beforeLabel": "白底",
+          "beforeLabel": "产品渲染图",
           "afterLabel": "AI合成",
           "recipe": [
-            "输入",
-            "处理",
-            "结果"
+            "产品渲染图",
+            "参考背景",
+            "商业场景效果图"
+          ]
+        },
+        {
+          "id": "option-03",
+          "title": "安全座椅",
+          "before": "assets-v8/03-cases/editor/comparison-background-option-03/before-1787627136869-pim27.png",
+          "after": "assets-v8/03-cases/editor/comparison-background-option-03/after-1787627140051-y47fm.png",
+          "reference": "",
+          "beforeLabel": "产品渲染图",
+          "afterLabel": "AI合成",
+          "recipe": [
+            "产品渲染图",
+            "参考背景",
+            "商业场景效果图"
           ]
         }
       ]
@@ -756,7 +821,7 @@ window.PORTFOLIO_DATA = {
           "after": "assets-v8/03-cases/editor/comparison-photo/after-1786689050146-mfszk.jpg",
           "reference": "",
           "beforeLabel": "拍摄原图",
-          "afterLabel": "AI 场景图",
+          "afterLabel": "AI 精修",
           "recipe": [
             "拍摄图片",
             "AI 精修"
@@ -771,8 +836,8 @@ window.PORTFOLIO_DATA = {
           "beforeLabel": "原图",
           "afterLabel": "精修",
           "recipe": [
-            "原图",
-            "精修"
+            "拍摄图片",
+            "AI 精修"
           ]
         },
         {
@@ -784,9 +849,8 @@ window.PORTFOLIO_DATA = {
           "beforeLabel": "原图",
           "afterLabel": "精修",
           "recipe": [
-            "输入",
-            "处理",
-            "结果"
+            "拍摄图片",
+            "AI 精修"
           ]
         },
         {
@@ -798,9 +862,8 @@ window.PORTFOLIO_DATA = {
           "beforeLabel": "原图",
           "afterLabel": "精修",
           "recipe": [
-            "输入",
-            "处理",
-            "结果"
+            "拍摄图片",
+            "AI 精修"
           ]
         }
       ]
@@ -839,12 +902,12 @@ window.PORTFOLIO_DATA = {
           "before": "assets-v8/03-cases/editor/comparison-cmp-04-option-02/before-1787621468526-xkig1.png",
           "after": "assets-v8/03-cases/editor/comparison-cmp-04-option-02/after-1787621471821-vig2w.png",
           "reference": "",
-          "beforeLabel": "原图",
+          "beforeLabel": "无材质",
           "afterLabel": "AI材质生成",
           "recipe": [
-            "输入",
-            "处理",
-            "结果"
+            "制作模型",
+            "AI生成材质贴图",
+            "3D渲染"
           ]
         }
       ]
