@@ -371,16 +371,21 @@
       position: relative; overflow: hidden; min-width: 0; min-height: 0;
       border: 1px solid rgba(100, 160, 255, 0.22);
       border-radius: 6px; background: #10294e;
-      transform: rotateY(0deg); transform-style: preserve-3d;
+      perspective: 900px;
     }
-    .hero-wall-card img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(0.12) brightness(0.9); }
-    .hero-wall-card.is-flipping { animation: heroTvFlip .78s cubic-bezier(.45,0,.2,1); }
-    @keyframes heroTvFlip {
-      0%, 100% { transform: perspective(700px) rotateY(0deg) scale(1); }
-      48% { transform: perspective(700px) rotateY(88deg) scale(.94); }
-      52% { transform: perspective(700px) rotateY(-88deg) scale(.94); }
+    .hero-tv-flipper {
+      position: absolute; inset: 0; transform-style: preserve-3d;
+      transition: transform .92s cubic-bezier(.2,.72,.18,1);
+      will-change: transform;
     }
-    @media (prefers-reduced-motion: reduce) { .hero-wall-card { animation: none !important; } }
+    .hero-wall-card.is-flipped .hero-tv-flipper { transform: rotateY(180deg); }
+    .hero-tv-face {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      display: block; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+      filter: grayscale(.12) brightness(.9); transform: rotateY(0deg);
+    }
+    .hero-tv-face.is-back { transform: rotateY(180deg); }
+    @media (prefers-reduced-motion: reduce) { .hero-tv-flipper { transition: none !important; } }
 
     /* ─── About / Strengths ─── */
     .strength-grid {
@@ -1884,37 +1889,58 @@
       const heroThumb = src => src
         .replace(/^assets-v8\//, 'assets-v8/wall-thumbs/')
         .replace(/\.(png|webp|jpe?g)$/i, '.webp');
-      const usable = heroWorks.slice(0, 56);
-      const cols = 10, cellCount = 60;
-      const wallSources = Array.from({ length: cellCount }, (_, index) => usable[index % usable.length]);
+      const usable = [...new Set(heroWorks)];
+      const cols = 10, cellCount = Math.min(60, usable.length);
+      const wallSources = usable.slice(0, cellCount);
       heroWallGrid.innerHTML = wallSources.map((src, index) =>
-        `<figure class="hero-wall-card" data-wall-index="${index}"><img src="${heroThumb(src)}" data-original-src="${src}" alt="" loading="eager" decoding="async"></figure>`
+        `<figure class="hero-wall-card" data-wall-index="${index}"><span class="hero-tv-flipper"><img class="hero-tv-face is-front" src="${heroThumb(src)}" data-original-src="${src}" alt="" loading="eager" decoding="async"><img class="hero-tv-face is-back" src="${heroThumb(src)}" data-original-src="${src}" alt="" loading="eager" decoding="async"></span></figure>`
       ).join('');
-      $$('.hero-wall-card img', heroWallGrid).forEach(img => img.addEventListener('error', () => {
-        if (img.dataset.originalSrc && img.src !== img.dataset.originalSrc) img.src = img.dataset.originalSrc;
-      }, { once: true }));
+      const bindWallFallback = img => img.addEventListener('error', () => {
+        if (img.dataset.originalSrc && img.dataset.fallback !== '1') {
+          img.dataset.fallback = '1'; img.src = img.dataset.originalSrc;
+        }
+      });
+      $$('.hero-tv-face', heroWallGrid).forEach(bindWallFallback);
       const hero = document.getElementById('hero');
       if (hero) {
         const wallCards = $$('.hero-wall-card', heroWallGrid);
-        let wallGeneration = 0;
-        const runWallWave = () => {
-          if (hero.classList.contains('offstage') || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        let wallGeneration = 0, wallBusy = false;
+        const currentSources = [...wallSources];
+        const setWallFace = (img, src) => {
+          img.dataset.originalSrc = src; img.dataset.fallback = '0'; img.src = heroThumb(src);
+        };
+        const preloadBatch = sources => Promise.all(sources.map(src => new Promise(resolve => {
+          const preload = new Image(); preload.onload = preload.onerror = resolve; preload.src = heroThumb(src);
+        })));
+        const runWallWave = async () => {
+          if (wallBusy || hero.classList.contains('offstage')) return;
+          wallBusy = true;
           wallGeneration += 1;
-          wallCards.forEach((card, index) => {
+          const nextSources = usable.filter(src => !currentSources.includes(src));
+          await preloadBatch(nextSources);
+          const replaceIndices = [];
+          for (let column = 0; column < cols; column += 1) {
+            const amount = column < 5 ? 4 : 3;
+            for (let step = 0; step < amount; step += 1) {
+              const row = (step + wallGeneration + column) % 6;
+              replaceIndices.push(row * cols + column);
+            }
+          }
+          replaceIndices.forEach((index, sourceIndex) => {
+            const card = wallCards[index];
+            const showingBack = card.classList.contains('is-flipped');
+            const hiddenFace = card.querySelector(showingBack ? '.is-front' : '.is-back');
+            const next = nextSources[sourceIndex];
+            setWallFace(hiddenFace, next);
+            currentSources[index] = next;
             const column = index % cols, row = Math.floor(index / cols);
             setTimeout(() => {
-              if (hero.classList.contains('offstage')) return;
-              const img = card.querySelector('img');
-              card.classList.add('is-flipping');
-              setTimeout(() => {
-                const next = usable[(index + wallGeneration * 11) % usable.length];
-                img.src = heroThumb(next); img.dataset.originalSrc = next;
-              }, 360);
-              setTimeout(() => card.classList.remove('is-flipping'), 800);
-            }, column * 95 + row * 18);
+              card.classList.toggle('is-flipped', !showingBack);
+            }, column * 115 + row * 22);
           });
+          setTimeout(() => { wallBusy = false; }, 2300);
         };
-        setInterval(runWallWave, 6500);
+        setInterval(runWallWave, 7200);
         const wallIO = new IntersectionObserver(([entry]) => {
           hero.classList.toggle('offstage', entry.intersectionRatio < 0.05);
         }, { threshold: [0, 0.05] });

@@ -1,10 +1,11 @@
 param(
   [int]$Width = 320,
-  [int]$Limit = 56
+  [int]$Limit = 0,
+  [string]$ProjectRoot = ''
 )
 
 $ErrorActionPreference = 'Stop'
-$repoRoot = Split-Path -Parent $PSScriptRoot
+$repoRoot = if ($ProjectRoot) { (Resolve-Path -LiteralPath $ProjectRoot).Path } else { Split-Path -Parent $PSScriptRoot }
 $dataPath = Join-Path $repoRoot 'portfolio-data.js'
 $raw = Get-Content -Raw -Encoding utf8 -LiteralPath $dataPath
 $json = $raw -replace '^\s*window\.PORTFOLIO_DATA\s*=\s*', '' -replace ';\s*$', ''
@@ -13,7 +14,8 @@ $ffmpegLink = (Get-Command ffmpeg -ErrorAction Stop).Source
 $ffmpeg = (Get-Item -LiteralPath $ffmpegLink).Target
 if (-not $ffmpeg) { $ffmpeg = $ffmpegLink }
 $projects = @($data.aiProducts) + @($data.renderProducts)
-$sources = @($projects | ForEach-Object { $_.images } | ForEach-Object { $_.src } | Where-Object { $_ } | Select-Object -First $Limit -Unique)
+$sources = @($projects | ForEach-Object { $_.images } | ForEach-Object { $_.src } | Where-Object { $_ } | Select-Object -Unique)
+if ($Limit -gt 0) { $sources = @($sources | Select-Object -First $Limit) }
 
 foreach ($relativeSource in $sources) {
   $source = Join-Path $repoRoot $relativeSource
