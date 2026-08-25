@@ -360,35 +360,27 @@
       background: linear-gradient(90deg, rgba(4,18,40,.24), transparent 24% 76%, rgba(4,18,40,.2));
     }
     .hero-wall-grid {
-      position: absolute; inset: -22% -3%;
+      position: absolute; inset: -4% -2%;
       display: grid; grid-template-columns: repeat(10, minmax(0, 1fr));
-      gap: 6px; transform: rotate(-4deg) scale(1.08);
+      grid-template-rows: repeat(6, minmax(0, 1fr));
+      gap: 8px; transform: rotate(-2.5deg) scale(1.06);
       opacity: 1; filter: saturate(0.9) contrast(1.02);
       will-change: transform;
     }
-    .hero-wall-column {
-      display: flex; flex-direction: column; gap: 12px;
-      transform: translateZ(0);
-      animation: heroWallRise 46s linear infinite;
-    }
-    .hero-wall-column:nth-child(even) { animation-name: heroWallFall; animation-duration: 52s; }
-    .hero-wall-column:nth-child(3) { animation-duration: 58s; }
-    .hero.offstage .hero-wall-column { animation-play-state: paused; }
     .hero-wall-card {
-      position: relative; overflow: hidden; flex: 0 0 auto;
-      min-height: 68px; border: 1px solid rgba(100, 160, 255, 0.16);
+      position: relative; overflow: hidden; min-width: 0; min-height: 0;
+      border: 1px solid rgba(100, 160, 255, 0.22);
       border-radius: 6px; background: #10294e;
-      contain: layout paint;
-      content-visibility: auto;
-      contain-intrinsic-size: auto 160px;
+      transform: rotateY(0deg); transform-style: preserve-3d;
     }
-    .hero-wall-card:nth-child(3n+1) { aspect-ratio: 4/5; }
-    .hero-wall-card:nth-child(3n+2) { aspect-ratio: 16/10; }
-    .hero-wall-card:nth-child(3n) { aspect-ratio: 1/1; }
     .hero-wall-card img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(0.12) brightness(0.9); }
-    @keyframes heroWallRise { from { transform: translateY(0); } to { transform: translateY(-33.333%); } }
-    @keyframes heroWallFall { from { transform: translateY(-33.333%); } to { transform: translateY(0); } }
-    @media (prefers-reduced-motion: reduce) { .hero-wall-column { animation: none !important; } }
+    .hero-wall-card.is-flipping { animation: heroTvFlip .78s cubic-bezier(.45,0,.2,1); }
+    @keyframes heroTvFlip {
+      0%, 100% { transform: perspective(700px) rotateY(0deg) scale(1); }
+      48% { transform: perspective(700px) rotateY(88deg) scale(.94); }
+      52% { transform: perspective(700px) rotateY(-88deg) scale(.94); }
+    }
+    @media (prefers-reduced-motion: reduce) { .hero-wall-card { animation: none !important; } }
 
     /* ─── About / Strengths ─── */
     .strength-grid {
@@ -1180,8 +1172,7 @@
       .contact-drawer.is-open, .bottom-contact-drawer.is-open { height: auto; overflow: visible; }
       .multi-compare-head { flex-direction: column; align-items: flex-start; }
       .footer { flex-direction: column; text-align: center; gap: 12px; }
-      .hero-wall-grid { grid-template-columns: repeat(5, 1fr); gap: 4px; }
-      .hero-wall-column:nth-child(n+6) { display: none; }
+      .hero-wall-grid { grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(12, minmax(0, 1fr)); gap: 4px; }
       .works-pano-viewport { height: 50vh; }
     }
 
@@ -1894,20 +1885,36 @@
         .replace(/^assets-v8\//, 'assets-v8/wall-thumbs/')
         .replace(/\.(png|webp|jpe?g)$/i, '.webp');
       const usable = heroWorks.slice(0, 56);
-      const cols = 10;
-      const columns = Array.from({length: cols}, () => []);
-      usable.forEach((src, i) => columns[i % cols].push(src));
-      heroWallGrid.innerHTML = columns.map((items, ci) => {
-        const seamlessItems = [...items, ...items, ...items];
-        return `<div class="hero-wall-column" aria-hidden="${ci ? 'true' : 'false'}">${
-          seamlessItems.map(src => `<figure class="hero-wall-card"><img src="${heroThumb(src)}" data-original-src="${src}" alt="" loading="${ci ? 'lazy' : 'eager'}" decoding="async"></figure>`).join('')
-        }</div>`;
-      }).join('');
+      const cols = 10, cellCount = 60;
+      const wallSources = Array.from({ length: cellCount }, (_, index) => usable[index % usable.length]);
+      heroWallGrid.innerHTML = wallSources.map((src, index) =>
+        `<figure class="hero-wall-card" data-wall-index="${index}"><img src="${heroThumb(src)}" data-original-src="${src}" alt="" loading="eager" decoding="async"></figure>`
+      ).join('');
       $$('.hero-wall-card img', heroWallGrid).forEach(img => img.addEventListener('error', () => {
         if (img.dataset.originalSrc && img.src !== img.dataset.originalSrc) img.src = img.dataset.originalSrc;
       }, { once: true }));
       const hero = document.getElementById('hero');
       if (hero) {
+        const wallCards = $$('.hero-wall-card', heroWallGrid);
+        let wallGeneration = 0;
+        const runWallWave = () => {
+          if (hero.classList.contains('offstage') || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          wallGeneration += 1;
+          wallCards.forEach((card, index) => {
+            const column = index % cols, row = Math.floor(index / cols);
+            setTimeout(() => {
+              if (hero.classList.contains('offstage')) return;
+              const img = card.querySelector('img');
+              card.classList.add('is-flipping');
+              setTimeout(() => {
+                const next = usable[(index + wallGeneration * 11) % usable.length];
+                img.src = heroThumb(next); img.dataset.originalSrc = next;
+              }, 360);
+              setTimeout(() => card.classList.remove('is-flipping'), 800);
+            }, column * 95 + row * 18);
+          });
+        };
+        setInterval(runWallWave, 6500);
         const wallIO = new IntersectionObserver(([entry]) => {
           hero.classList.toggle('offstage', entry.intersectionRatio < 0.05);
         }, { threshold: [0, 0.05] });
