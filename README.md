@@ -1,6 +1,13 @@
 # Personal Website
 
-3D / AIGC 产品视觉作品集（V10）。站点为纯静态 HTML，可直接部署到腾讯云 EdgeOne Pages。
+3D / AIGC 产品视觉作品集。站点为纯静态 HTML，可直接部署到腾讯云 EdgeOne Pages。
+
+当前仓库同时保存 V11 与 V13 页面，两套页面共用一份作品数据和素材库：
+
+- V11：`/`（仓库入口 `index.html`）
+- V13：`/v13.html`
+- 共享数据：`portfolio-data.js`
+- 共享素材：`assets-v8/`
 
 ## EdgeOne Pages 部署
 
@@ -18,11 +25,12 @@
 
 ```text
 .
-├── index.html           # V10 作品集
+├── index.html           # V11 默认首页
+├── v13.html             # V13 独立页面
 ├── portfolio-data.js    # 作品 / 工作流 / 对比数据
 ├── assets-v8/           # 首屏视频、案例图、作品图
 ├── edgeone.json
 └── README.md
 ```
 
-本地可视化编辑器只在本机使用，不会随站点发布。
+本地可视化编辑器只在本机使用，不会随站点发布。更新共享数据或素材后，V11 与 V13 会同时读取新内容，无需维护两套素材副本。
