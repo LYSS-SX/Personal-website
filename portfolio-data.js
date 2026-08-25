@@ -222,6 +222,12 @@ window.PORTFOLIO_DATA = {
       ]
     },
     {
+      "id": "ai-06",
+      "title": "儿童用品",
+      "desc": "",
+      "images": []
+    },
+    {
       "id": "ai-04",
       "title": "户外装备",
       "desc": "",

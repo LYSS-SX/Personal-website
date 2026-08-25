@@ -2037,7 +2037,7 @@
     const portfolioData = window.PORTFOLIO_DATA || { aiProducts: [], renderProducts: [] };
     const thumbSrc = src => src;
     const galleryItems = [];
-    const folderDefs = { aiProducts: (portfolioData.aiProducts || []).slice(0, 5), renderProducts: (portfolioData.renderProducts || []).slice(0, 5) };
+    const folderDefs = { aiProducts: (portfolioData.aiProducts || []).slice(0, 6), renderProducts: (portfolioData.renderProducts || []).slice(0, 5) };
     Object.values(folderDefs).flat().forEach(folder => {
       folder._resolved = (folder.images || []).map(image => {
         const item = [image.title || folder.title, '', image.src, image.ratio || 'auto'];
