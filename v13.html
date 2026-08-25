@@ -1739,7 +1739,6 @@
   <div class="chapter-rail" id="chapterRail" aria-hidden="true"></div>
 
   <script src="portfolio-data.js"></script>
-  <script src="thumb-meta.js"></script>
   <script>
     /* ═══════════════════════════════════════════════
        V13 Apple-Inspired Portfolio — JavaScript
@@ -1890,11 +1889,9 @@
       .flatMap(project => (project.images || []).map(image => image.src)).filter(Boolean);
     const heroWallGrid = $('#heroWallGrid');
     if (heroWallGrid && heroWorks.length) {
-      const heroThumb = src => {
-        if (!src || /^https?:/.test(src) || location.hostname === '127.0.0.1' || location.hostname === 'localhost') return src;
-        if (!src.startsWith('assets-v8/')) return src;
-        return src.replace(/^assets-v8\//, 'assets-v8/thumbs/s/').replace(/\.(png|webp|jpe?g)$/i, '.jpg');
-      };
+      // Use the original portfolio assets on static hosting. Generated
+      // thumbnail folders are optional and must never be a hard dependency.
+      const heroThumb = src => src;
       const usable = heroWorks.slice(0, 56);
       const cols = 8;
       const columns = Array.from({length: cols}, () => []);
@@ -2033,15 +2030,7 @@
 
     /* ─── Portfolio Data ─── */
     const portfolioData = window.PORTFOLIO_DATA || { aiProducts: [], renderProducts: [] };
-    const thumbMeta = window.THUMB_META || {};
-    const thumbSrc = (src, size) => {
-      if (!src) return src;
-      const kind = size === 's' ? 's' : 'm';
-      const host = location.hostname;
-      if (host === '127.0.0.1' || host === 'localhost') return `/api/img?path=${encodeURIComponent(src)}&max=${kind === 's' ? 720 : 1600}`;
-      if (!src.startsWith('assets-v8/')) return src;
-      return src.replace(/^assets-v8\//, `assets-v8/thumbs/${kind}/`).replace(/\.(png|webp|jpe?g)$/i, '.jpg');
-    };
+    const thumbSrc = src => src;
     const galleryItems = [];
     const folderDefs = { aiProducts: (portfolioData.aiProducts || []).slice(0, 5), renderProducts: (portfolioData.renderProducts || []).slice(0, 5) };
     Object.values(folderDefs).flat().forEach(folder => {
