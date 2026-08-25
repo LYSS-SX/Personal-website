@@ -354,17 +354,17 @@
     }
 
     /* ─── Hero Wall (works grid) ─── */
-    .hero-work-wall { overflow: hidden; }
+    .hero-work-wall { overflow: hidden; background: #071a35; }
     .hero-work-wall:before {
       content: ""; position: absolute; z-index: 2; inset: 0; pointer-events: none;
-      background: radial-gradient(circle at 50% 42%, transparent 0 28%, rgba(0,0,0,.18) 58%, rgba(0,0,0,.76) 100%),
-                  linear-gradient(90deg, rgba(0,0,0,.72), transparent 28% 70%, rgba(0,0,0,.62));
+      background: radial-gradient(circle at 50% 42%, transparent 0 28%, rgba(5,24,50,.14) 58%, rgba(4,17,38,.72) 100%),
+                  linear-gradient(90deg, rgba(4,18,40,.68), transparent 28% 70%, rgba(4,18,40,.58));
     }
     .hero-wall-grid {
       position: absolute; inset: -22% -3%;
       display: grid; grid-template-columns: repeat(8, minmax(0, 1fr));
       gap: 6px; transform: rotate(-4deg) scale(1.02);
-      opacity: 0.72; filter: saturate(0.72) contrast(1.08);
+      opacity: 0.86; filter: saturate(0.82) contrast(1.04);
       will-change: transform;
     }
     .hero-wall-column {
@@ -378,7 +378,7 @@
     .hero-wall-card {
       position: relative; overflow: hidden; flex: 0 0 auto;
       min-height: 68px; border: 1px solid rgba(100, 160, 255, 0.16);
-      border-radius: 6px; background: #08101c;
+      border-radius: 6px; background: #10294e;
       contain: layout paint;
       content-visibility: auto;
       contain-intrinsic-size: auto 160px;
@@ -386,7 +386,7 @@
     .hero-wall-card:nth-child(3n+1) { aspect-ratio: 4/5; }
     .hero-wall-card:nth-child(3n+2) { aspect-ratio: 16/10; }
     .hero-wall-card:nth-child(3n) { aspect-ratio: 1/1; }
-    .hero-wall-card img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(0.25) brightness(0.75); }
+    .hero-wall-card img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(0.12) brightness(0.9); }
     @keyframes heroWallRise { from { transform: translateY(0); } to { transform: translateY(-50%); } }
     @keyframes heroWallFall { from { transform: translateY(-50%); } to { transform: translateY(0); } }
     @media (prefers-reduced-motion: reduce) { .hero-wall-column { animation: none !important; } }
@@ -1889,18 +1889,23 @@
       .flatMap(project => (project.images || []).map(image => image.src)).filter(Boolean);
     const heroWallGrid = $('#heroWallGrid');
     if (heroWallGrid && heroWorks.length) {
-      // Use the original portfolio assets on static hosting. Generated
-      // thumbnail folders are optional and must never be a hard dependency.
-      const heroThumb = src => src;
+      // The wall is decorative and never opens a lightbox, so it uses committed
+      // 320px WebP assets. Every image keeps its original path as a safe fallback.
+      const heroThumb = src => src
+        .replace(/^assets-v8\//, 'assets-v8/wall-thumbs/')
+        .replace(/\.(png|webp|jpe?g)$/i, '.webp');
       const usable = heroWorks.slice(0, 56);
       const cols = 8;
       const columns = Array.from({length: cols}, () => []);
       usable.forEach((src, i) => columns[i % cols].push(src));
       heroWallGrid.innerHTML = columns.map((items, ci) =>
         `<div class="hero-wall-column" aria-hidden="${ci ? 'true' : 'false'}">${
-          items.map(src => `<figure class="hero-wall-card"><img src="${heroThumb(src)}" alt="" loading="${ci ? 'lazy' : 'eager'}" decoding="async"></figure>`).join('')
+          items.map(src => `<figure class="hero-wall-card"><img src="${heroThumb(src)}" data-original-src="${src}" alt="" loading="${ci ? 'lazy' : 'eager'}" decoding="async"></figure>`).join('')
         }</div>`
       ).join('');
+      $$('.hero-wall-card img', heroWallGrid).forEach(img => img.addEventListener('error', () => {
+        if (img.dataset.originalSrc && img.src !== img.dataset.originalSrc) img.src = img.dataset.originalSrc;
+      }, { once: true }));
       const hero = document.getElementById('hero');
       if (hero) {
         const wallIO = new IntersectionObserver(([entry]) => {
