@@ -6,6 +6,12 @@
   <meta name="description" content="建模、渲染与 AIGC 产品视觉设计作品集。">
   <meta name="theme-color" content="#000000">
   <title>V13 作品集 · 3D / AIGC 产品视觉设计</title>
+  <script>
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    scrollTo(0, 0);
+    addEventListener('pageshow', () => requestAnimationFrame(() => scrollTo(0, 0)), { once: true });
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -1948,6 +1954,7 @@
           hero.classList.toggle('offstage', entry.intersectionRatio < 0.05);
         }, { threshold: [0, 0.05] });
         wallIO.observe(hero);
+        setTimeout(runWallWave, 180);
       }
     }
     let active = -1, hTimer;
