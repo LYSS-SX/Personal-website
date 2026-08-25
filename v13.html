@@ -418,7 +418,7 @@
     .strength-render:hover { background: linear-gradient(135deg, #1d3a1f, #1d1d1f); }
     .strength-aigc:hover   { background: linear-gradient(135deg, #3a1d3a, #1d1d1f); }
     .strength-ready:hover  { background: linear-gradient(135deg, #3a3a1d, #1d1d1f); }
-    .strength-skills:hover { background: linear-gradient(135deg, #1d2a3a, #1d1d1f); }
+    .strength-skills:hover { background: #0056ff; }
     .strength-model:hover .strength-icon  { background: #4a6cf7; color: #fff; }
     .strength-render:hover .strength-icon { background: #34c759; color: #fff; }
     .strength-aigc:hover .strength-icon   { background: #af52de; color: #fff; }
@@ -482,7 +482,14 @@
       grid-template-columns: 1fr 1fr;
       gap: 40px;
       align-items: start;
+      background: #0056ff;
+      color: #fff;
     }
+    .strength-skills p { color: rgba(255,255,255,.78); }
+    .strength-skills p strong,
+    .strength-skills .strength-index,
+    .strength-skills .skill-label { color: #fff; }
+    .strength-skills .skill-list span { background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.24); }
     .skill-groups { display: grid; gap: 16px; }
     .skill-group { display: grid; gap: 10px; }
     .skill-label { font-size: 11px; color: var(--accent); font-family: var(--mono); letter-spacing: 0.06em; }
@@ -1267,7 +1274,7 @@
       <div class="nav-links">
         <a href="#cases">案例展示</a>
         <a href="#works">静态作品</a>
-        <a href="#about">个人优势</a>
+        <a href="#about">个人简介及优势</a>
         <a href="#hybrid">3D + AIGC</a>
         <a href="#ai-video">AI视频TVC</a>
       </div>
@@ -1283,7 +1290,7 @@
         <a class="sm-panel-item" style="--i:0" href="#top"><span class="sm-number">01</span><span class="sm-label">首页海报</span></a>
         <a class="sm-panel-item" style="--i:1" href="#cases"><span class="sm-number">02</span><span class="sm-label">案例展示</span></a>
         <a class="sm-panel-item" style="--i:2" href="#works"><span class="sm-number">03</span><span class="sm-label">静态作品</span></a>
-        <a class="sm-panel-item" style="--i:3" href="#about"><span class="sm-number">04</span><span class="sm-label">个人优势</span></a>
+        <a class="sm-panel-item" style="--i:3" href="#about"><span class="sm-number">04</span><span class="sm-label">个人简介及优势</span></a>
         <a class="sm-panel-item" style="--i:4" href="#hybrid"><span class="sm-number">05</span><span class="sm-label">3D + AIGC</span></a>
         <a class="sm-panel-item" style="--i:5" href="#ai-video"><span class="sm-number">06</span><span class="sm-label">AI 视频 TVC</span></a>
         <a class="sm-panel-item" style="--i:6" href="#summary"><span class="sm-number">07</span><span class="sm-label">全文总结</span></a>
@@ -1507,7 +1514,7 @@
     <section class="block" id="about">
       <div class="sec-head reveal">
         <div class="sub">Core Strengths</div>
-        <h2>个人优势 <span class="arr">↘</span></h2>
+        <h2>个人简介及优势 <span class="arr">↘</span></h2>
         <p>从<strong>准确产品资产</strong>到商用渲染与 AIGC 内容扩展，能独立完成<strong>完整的产品视觉链路</strong>。</p>
       </div>
       <div class="strength-grid">
@@ -1562,7 +1569,7 @@
               <span class="skill-label">AI TOOLS</span>
               <div class="skill-list">
                 <span>GPT Codex</span><span>Grok</span><span>即梦</span>
-                <span>MiniMax</span><span>小云雀</span><span>RunningHub</span>
+                <span>MiniMax</span><span>NanoBanana</span><span>RunningHub</span>
               </div>
             </div>
           </div>
