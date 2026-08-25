@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="建模、渲染与 AIGC 产品视觉设计作品集。">
   <meta name="theme-color" content="#000000">
-  <title>V10 作品集 · 3D / AIGC 产品视觉设计</title>
+  <title>V11 作品集 · 3D / AIGC 产品视觉设计</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -831,7 +831,7 @@
     }
     .compare-recipe b { color: var(--muted-2); font-weight: 500; }
     .compare-stage {
-      width: 100%; aspect-ratio: 16 / 7;
+      width: 100%; aspect-ratio: 16 / 9;
       position: relative; overflow: hidden;
       cursor: ew-resize; touch-action: none; user-select: none;
       border: 1px solid var(--line-2); border-radius: var(--radius-lg);
@@ -1394,7 +1394,7 @@
       .flow-shot::after { display: none; }
       .multi-compare-head { display: block; }
       .compare-modes { margin-top: 14px; }
-      .compare-stage { aspect-ratio: 4 / 3; }
+      .compare-stage { aspect-ratio: 16 / 9; }
       .case-system { margin: 0 12px; border-radius: 0; }
       .hybrid-shell { margin: 0 12px; }
       .video-lab { margin: 0 12px; padding: 20px 14px; border-radius: 20px; overflow: hidden; }
@@ -2016,16 +2016,17 @@
     #cases .compare-mode.is-active{background:rgba(255,255,255,.92)!important;color:#10100f!important;border-color:rgba(255,255,255,.95)!important}
     #cases .compare-stage{
       width:100%!important;
-      aspect-ratio:16/8!important;
-      min-height:clamp(360px,42vw,620px)!important;
-      align-self:stretch!important;
+      aspect-ratio:16/9!important;
+      min-height:0!important;
+      height:auto!important;
+      align-self:center!important;
       border-radius:12px!important;
       border-color:rgba(255,255,255,.2)!important;
     }
     @media(max-width:720px){
       #cases .multi-compare-head{display:block!important}
       #cases .compare-modes{display:flex!important;flex-direction:row!important;flex-wrap:wrap;margin-top:16px;grid-template-columns:none!important}
-      #cases .compare-stage{min-height:240px!important;aspect-ratio:4/3!important}
+      #cases .compare-stage{min-height:0!important;aspect-ratio:16/9!important}
     }
 
     @media(min-width:1101px){
@@ -2191,6 +2192,14 @@
       min-height:0!important;
       height:auto!important;
     }
+    #ai-video .ai-video-previews{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      align-items:start;
+      gap:clamp(16px,1.6vw,26px);
+      min-width:0;
+    }
+    #ai-video .ai-video-previews .ad-video-showcase{min-width:0}
     #ai-video .sky-frost{
       position:absolute;z-index:0;inset:0;pointer-events:none;
       background:rgba(6,6,10,.2);
@@ -2412,6 +2421,7 @@
       #ai-video .ai-video-hero .sec-head{width:100%!important}
       #ai-video .ai-video-hero .sec-head h2{white-space:normal!important;font-size:clamp(40px,12vw,68px)!important}
       #ai-video .ai-video-hero .ad-video-showcase{width:100%!important;justify-content:stretch}
+      #ai-video .ai-video-previews{grid-template-columns:1fr;width:100%}
       #ai-video .tv-set{width:100%}
       #ai-video .ai-video-hero .ad-video-head{min-width:0;max-width:none}
       #ai-video .ai-media-layout{width:calc(100% - 24px)!important}
@@ -2651,6 +2661,40 @@
       .hero-core-link{display:none!important}
     }
   </style>
+  <style id="v10-nested-compare-icons">
+    .engine-card{position:relative}
+    .engine-icon{width:58px;height:58px;margin:0 0 28px;display:grid;place-items:center;border:1px solid rgba(115,169,255,.38);border-radius:18px;background:#0b1629;color:#6eabff;transition:transform .45s cubic-bezier(.2,.8,.2,1),background .35s,border-color .35s}
+    .engine-icon svg{width:29px;height:29px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+    .engine-card:hover .engine-icon{transform:translateY(-5px) rotate(-3deg);background:#075cff;border-color:#84b8ff;color:#fff}
+    .engine-card[data-engine="02"] .engine-icon{border-radius:50%}
+    .engine-card[data-engine="03"] .engine-icon{border-radius:18px 18px 8px 18px}
+    #cases .compare-variants{position:relative;z-index:2;display:flex;align-items:center;gap:10px;min-height:0;margin:0 0 22px;padding:0;opacity:1;transform:none;transition:opacity .3s ease,transform .3s ease}
+    #cases .compare-variants.is-switching{opacity:.2;transform:translateY(-6px)}
+    #cases .compare-variant{position:relative;min-height:48px;padding:0 19px 0 42px;border:1px solid rgba(115,169,255,.28);border-radius:14px;background:rgba(8,18,34,.72);color:rgba(255,255,255,.72);font:750 13px/1 var(--font);cursor:pointer;transition:background .25s,border-color .25s,color .25s,transform .25s}
+    #cases .compare-variant:before{content:attr(data-index);position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#5d9dff;font:800 10px/1 var(--mono);letter-spacing:.08em}
+    #cases .compare-variant:hover{transform:translateY(-2px);border-color:#5d9dff;color:#fff}
+    #cases .compare-variant.is-active{background:#075cff;border-color:#75acff;color:#fff;box-shadow:0 10px 30px rgba(0,86,255,.24)}
+    #cases .compare-variant.is-active:before{color:#fff}
+    @media(max-width:720px){.engine-icon{width:50px;height:50px;margin-bottom:20px}.engine-icon svg{width:25px;height:25px}#cases .compare-variants{overflow-x:auto;padding-bottom:5px}#cases .compare-variant{flex:0 0 auto}}
+  </style>
+  <style id="v11-hero-archive">
+    .hero-work-wall{overflow:hidden;background:#03060b!important;isolation:isolate}
+    .hero-work-wall:before{content:"";position:absolute;z-index:2;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 42%,transparent 0 28%,rgba(2,5,10,.18) 58%,rgba(2,4,8,.76) 100%),linear-gradient(90deg,rgba(2,5,10,.72),transparent 28% 70%,rgba(2,5,10,.62))}
+    .hero-work-wall:after{content:"SELECTED WORKS / LIVE ARCHIVE";position:absolute;z-index:3;right:clamp(24px,4vw,72px);bottom:clamp(22px,4vw,60px);color:rgba(255,255,255,.38);font:700 10px/1 var(--mono);letter-spacing:.18em}
+    .hero-wall-grid{position:absolute;inset:-34% -4%;display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:clamp(5px,.48vw,9px);transform:rotate(-5deg) scale(1.035);opacity:.72;filter:saturate(.72) contrast(1.08)}
+    .hero-wall-column{display:flex;flex-direction:column;gap:clamp(10px,1.25vw,22px);will-change:transform;animation:heroWallRise 46s linear infinite}
+    .hero-wall-column:nth-child(even){animation-name:heroWallFall;animation-duration:52s}
+    .hero-wall-column:nth-child(3){animation-duration:58s}
+    .hero-wall-card{position:relative;overflow:hidden;flex:0 0 auto;min-height:68px;border:1px solid rgba(100,160,255,.16);border-radius:6px;background:#08101c}
+    .hero-wall-card:nth-child(3n+1){aspect-ratio:4/5}.hero-wall-card:nth-child(3n+2){aspect-ratio:16/10}.hero-wall-card:nth-child(3n){aspect-ratio:1/1}
+    .hero-wall-card img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.25) brightness(.75);transition:filter .55s,transform .8s}
+    .hero-work-wall.is-active .hero-wall-card:hover img{filter:none;transform:scale(1.04)}
+    @keyframes heroWallRise{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+    @keyframes heroWallFall{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+    @media(max-width:1100px){.hero-wall-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}.hero-wall-column:nth-child(n+7){display:none}.hero-wall-card{min-height:82px}}
+    @media(max-width:760px){.hero-wall-grid{inset:-20% -34%;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.hero-wall-column:nth-child(n+5){display:none}.hero-wall-card{min-height:96px}}
+    @media(prefers-reduced-motion:reduce){.hero-wall-column{animation:none!important}}
+  </style>
 </head>
 <body class="v9">
   <a class="skip-link" href="#top">跳到主要内容</a>
@@ -2693,14 +2737,14 @@
   <div class="nav-wrap" id="navWrap">
     <nav class="nav" aria-label="主导航">
       <div class="nav-start">
-        <a class="brand" href="#top"><i>主</i>主页</a>
+        <a class="brand" href="#top"><i>韦</i>韦韵双 · 视觉设计作品集</a>
       </div>
       <div class="nav-links mono">
+        <a href="#cases">案例展示</a>
+        <a href="#works">静态作品</a>
         <a href="#about">个人优势</a>
         <a href="#hybrid">3D+AIGC</a>
-        <a href="#cases">案例</a>
-        <a href="#ai-video">AI 广告视频</a>
-        <a href="#works">精选作品</a>
+        <a href="#ai-video">AI 视频 TVC</a>
       </div>
       <button class="nav-cta" id="contactToggle" type="button" aria-expanded="false">联系我</button>
     </nav>
@@ -2717,7 +2761,8 @@
     <section class="hero" id="hero">
       <div class="hero-poster">
         <div class="hero-bg" id="heroBg">
-          <div class="hero-frame is-active"><video class="hero-video" src="assets-v8/00-hero/videos/hero-01.mp4" muted playsinline preload="auto" autoplay></video></div>
+          <div class="hero-frame hero-work-wall is-active" id="heroWorkWall"><div class="hero-wall-grid" id="heroWallGrid" aria-label="作品瀑布流展示"></div></div>
+          <div class="hero-frame"><video class="hero-video" src="assets-v8/00-hero/videos/hero-01.mp4" muted playsinline preload="metadata"></video></div>
           <div class="hero-frame"><video class="hero-video" src="assets-v8/00-hero/videos/hero-02.mp4" muted playsinline preload="metadata"></video></div>
           <div class="hero-shade"></div>
         </div>
@@ -2725,7 +2770,7 @@
         <aside class="hero-deco hero-deco-tl" aria-hidden="true">
           <i class="px-cross"></i>
           <span>SELECTED ARCHIVE</span>
-          <span>FRAME 01 / 02</span>
+          <span>FRAME 01 / 03</span>
           <b>MODEL · RENDER · AIGC</b>
         </aside>
         <aside class="hero-deco hero-deco-tr" aria-hidden="true">
@@ -2748,9 +2793,10 @@
             <div class="particle-text hero-value" data-particle-text="Efficiency" aria-label="Efficiency"><canvas aria-hidden="true"></canvas><span class="particle-sr">Efficiency</span></div>
           </div>
         </div>
-        <div class="hero-reels" aria-label="视频切换">
-          <button class="is-active" data-hero="0" type="button"><span class="mono">01</span><b>产品 TVC</b><small>PRODUCT FILM</small></button>
-          <button data-hero="1" type="button"><span class="mono">02</span><b>IP TVC</b><small>IP MOTION</small></button>
+        <div class="hero-reels" aria-label="开屏内容切换">
+          <button class="is-active" data-hero="0" type="button"><span class="mono">01</span><b>作品瀑布流</b><small>WORKS ARCHIVE</small></button>
+          <button data-hero="1" type="button"><span class="mono">02</span><b>产品 TVC</b><small>PRODUCT FILM</small></button>
+          <button data-hero="2" type="button"><span class="mono">03</span><b>IP TVC</b><small>IP MOTION</small></button>
         </div>
         <div class="hero-caption-left">
           <p>从产品资产、视觉概念到营销短片，用一套可控流程把速度、质量与成本控制在合理范围内。</p>
@@ -2759,14 +2805,14 @@
             <a class="btn btn-ghost" href="#about">关于我</a>
           </div>
         </div>
-        <a class="hero-core-link" href="#about"><small>CORE STRENGTHS</small><span>个人优势</span><i aria-hidden="true">↓</i></a>
+        <a class="hero-core-link" href="#cases"><small>NEXT CHAPTER</small><span>两套工作流</span><i aria-hidden="true">↓</i></a>
       </div>
     </section>
 
-    <!-- 02 / Core strengths -->
+    <!-- 04 / Core strengths -->
     <section class="block" id="about">
       <canvas class="dust-canvas" id="aboutDust" aria-hidden="true"></canvas>
-      <span class="section-no" aria-hidden="true">02</span>
+      <span class="section-no" aria-hidden="true">04</span>
       <div class="sec-head">
         <div>
           <h2 class="reveal">个人优势 <span class="arr">↘</span></h2>
@@ -2816,7 +2862,7 @@
 
     <!-- 3D + AIGC -->
     <section class="block" id="hybrid">
-      <span class="section-no" aria-hidden="true">03</span>
+      <span class="section-no" aria-hidden="true">05</span>
       <div class="sec-head">
         <div>
           <h2 class="reveal"><span class="type-cycle" id="hybridType"><span class="type-cycle-text" id="hybridTypeText"></span><span class="type-cycle-line" aria-hidden="true"></span></span>双引擎协同 <span class="arr">↘</span></h2>
@@ -2827,15 +2873,18 @@
       <div class="hybrid-shell-v8 reveal">
         <div class="engine-main-pair">
         <article class="engine-card" data-engine="01">
+          <span class="engine-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="m5 10 11-6 11 6-11 6-11-6Z"/><path d="m5 10 11 6 11-6v12l-11 6-11-6V10Z"/><path d="M16 16v12"/></svg></span>
           <span class="engine-tag">ENGINE 01 · 3D</span><h3>三维流程确保产品一致性</h3><p>模型、材质、尺寸准确，完全可修改，保证产品在任何场景里都经得起放大与改款。</p>
           <ul><li>逆向建模 / 高精曲面与装配关系</li><li>高清无损分辨率</li><li>适合长期资产、结构演示与改款迭代</li><li>搭建可控制的 AI 参考场景，包括图片与视频</li></ul>
         </article>
         <article class="engine-card" data-engine="02">
+          <span class="engine-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 3v5M16 24v5M3 16h5M24 16h5M7 7l3.5 3.5M21.5 21.5 25 25M25 7l-3.5 3.5M10.5 21.5 7 25"/><circle cx="16" cy="16" r="6"/><path d="m14 16 2-4 2 4-2 4-2-4Z"/></svg></span>
           <span class="engine-tag">ENGINE 02 · AIGC</span><h3>AI 高效创意扩展</h3><p>三维确定产品身份，AI 负责扩展场景、方案和创意方向。</p>
           <ul><li>白模 / 渲染 / 实拍均可作为可控参考输入</li><li>帮助人脑更快发挥创意，快速验证方案</li><li>专业 Skill 配合 Agent 拓展提示词工程</li><li>充分利用不同模型优势提升出图质量</li></ul>
         </article>
         </div>
         <article class="engine-card ai-tools" data-engine="03">
+          <span class="engine-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="3"/><ellipse cx="16" cy="16" rx="12" ry="5"/><ellipse cx="16" cy="16" rx="5" ry="12" transform="rotate(38 16 16)"/><circle cx="27" cy="16" r="1.4" fill="currentColor" stroke="none"/></svg></span>
           <span class="engine-tag">ENGINE 03 · EMERGING TOOLS</span><h3>AI 工具的扩展潜力</h3><p>正在快速发展、并能进入专业生产链路的新能力。</p>
           <div class="engine-subblock"><h4>AI 生成 3D 模型</h4><p>适合 IP、游戏二次雕刻、传统三维场景道具补充，以及白模参考场景的快速搭建；产品近距离精度仍需专业建模。</p></div>
           <div class="engine-subblock"><h4>高斯泼溅扫描</h4><p>直接扫描局部或整屋，保留真实光影与材质，在空间记录和特殊行业场景中具备价值。</p></div>
@@ -2844,14 +2893,14 @@
       </div>
     </section>
 
-    <!-- 04 / Cases -->
+    <!-- 02 / Cases -->
     <section class="block" id="cases">
       <canvas class="darkveil-canvas" id="casesDarkVeil" aria-hidden="true"></canvas>
-      <span class="section-no" aria-hidden="true">04</span>
+      <span class="section-no" aria-hidden="true">02</span>
       <div class="sec-head">
         <div>
-          <h2 class="reveal">产品渲染和AI合成案例 <span class="arr">↘</span></h2>
-          <div class="sub reveal d1">以传统建模流程为基础，可直接出渲染图或利用AIGC快速合成，降本增效同时提升创意落地的效果</div>
+          <h2 class="reveal">精确建模 + AIGC 合成<br>能控图、能落地 <span class="arr">↘</span></h2>
+          <div class="sub reveal d1">以传统建模流程为基础，可直接出渲染图或利用 AIGC 快速合成，降本增效同时提升创意落地的效果。</div>
         </div>
       </div>
       <div class="case-system reveal">
@@ -2912,20 +2961,21 @@
         <div class="multi-compare">
           <div class="multi-compare-head">
             <div>
-              <h4>AI 合成对比</h4>
-              <p>点击模式切换，再拖动分割线查看输入如何变成最终画面。</p>
+              <h4>我用AI能做什么</h4>
+              <p>切换模式，拖动分割线查看变化。</p>
             </div>
-            <div class="compare-modes" role="tablist" aria-label="AI合成对比模式"></div>
+            <div class="compare-modes" role="tablist" aria-label="对比模式"></div>
           </div>
+          <div class="compare-variants" id="compareVariants" role="tablist" aria-label="子方案"></div>
           <div class="compare-recipe" id="compareRecipe" hidden>
             <span>白模场景</span><b>+</b><span>产品渲染</span><b>→</b><span>最终合成效果图</span>
           </div>
           <div class="compare-stage" id="compareStage">
             <div class="compare-layer"><img id="compareAfterImg" src="" alt="最终成片"></div>
             <div class="compare-layer compare-before" id="compareBefore"><img id="compareBeforeImg" src="" alt="输入素材"></div>
-            <span class="compare-label before mono" id="compareBeforeLabel">白模场景</span>
-            <span class="compare-label after mono" id="compareAfterLabel">最终合成</span>
-            <div class="compare-ref" id="compareRef" hidden><img id="compareRefImg" alt="材质参考"></div>
+            <span class="compare-label before mono" id="compareBeforeLabel">输入</span>
+            <span class="compare-label after mono" id="compareAfterLabel">结果</span>
+            <div class="compare-ref" id="compareRef" hidden><img id="compareRefImg" alt="参考"></div>
             <div class="compare-divider" id="compareDivider"></div>
             <div class="compare-handle" id="compareHandle">↔</div>
           </div>
@@ -2933,32 +2983,49 @@
       </div>
     </section>
 
-    <!-- 04 / AI Video -->
+    <!-- 06 / AI Video -->
     <section class="block" id="ai-video">
-      <span class="section-no" aria-hidden="true">05</span>
+      <span class="section-no" aria-hidden="true">06</span>
       <div class="sky-frost" aria-hidden="true"></div>
       <canvas class="pixel-canvas" id="aiVideoPixels" aria-hidden="true"></canvas>
       <div class="ai-video-hero">
         <div class="sec-head">
           <div>
-            <h2 class="reveal"><span class="ai-title-line"><span class="ai-title-mark">AI视频</span></span><span class="ai-title-line">TVC流程 <span class="arr">↘</span></span></h2>
+            <h2 class="reveal"><span class="ai-title-line"><span class="ai-title-mark">AI 视频</span></span><span class="ai-title-line">TVC 流程 <span class="arr">↘</span></span></h2>
             <div class="sub reveal d1">从广告策略到可投放成片</div>
           </div>
           <p class="reveal d2">AI 视频不是“输入一句话等结果”。真正可用的流程，要同时控制<strong>创意、模型、提示词、一致性、成本</strong>和营销落地。</p>
         </div>
-        <div class="ad-video-showcase reveal is-tv" id="adVideoShowcase">
-          <div class="tv-set">
-            <div class="tv-bezel">
-              <div class="ad-video-stage">
-                <video id="adVideoPlayer" controls muted playsinline preload="metadata">
-                  <source src="assets-v8/00-hero/videos/hero-01.mp4" type="video/mp4">
-                </video>
+        <div class="ai-video-previews reveal">
+          <div class="ad-video-showcase is-tv" id="adVideoShowcase">
+            <div class="tv-set">
+              <div class="tv-bezel">
+                <div class="ad-video-stage">
+                  <video id="adVideoPlayer" controls muted playsinline preload="metadata">
+                    <source src="assets-v8/00-hero/videos/hero-01.mp4" type="video/mp4">
+                  </video>
+                </div>
               </div>
             </div>
+            <div class="ad-video-head">
+              <div><small>PRODUCT TVC / LONG-FORM PREVIEW</small><h3 id="adVideoTitle">产品 TVC 预览</h3></div>
+              <div class="ad-video-meta">PRODUCT FILM<br>AUTO PLAY IN VIEW</div>
+            </div>
           </div>
-          <div class="ad-video-head">
-            <div><small>PRODUCT TVC / LONG-FORM PREVIEW</small><h3 id="adVideoTitle">产品 TVC 预览</h3></div>
-            <div class="ad-video-meta">LONG-FORM EDIT<br>AUTO PLAY IN VIEW</div>
+          <div class="ad-video-showcase is-tv" id="adIpShowcase">
+            <div class="tv-set">
+              <div class="tv-bezel">
+                <div class="ad-video-stage">
+                  <video id="adIpPlayer" controls muted playsinline preload="metadata">
+                    <source src="assets-v8/00-hero/videos/hero-02.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="ad-video-head">
+              <div><small>IP TVC / LONG-FORM PREVIEW</small><h3>IP TVC 预览</h3></div>
+              <div class="ad-video-meta">IP MOTION FILM<br>AUTO PLAY IN VIEW</div>
+            </div>
           </div>
         </div>
       </div>
@@ -2981,10 +3048,10 @@
       </div>
     </section>
 
-    <!-- 05 / Works -->
+    <!-- 03 / Works -->
     <section class="block" id="works">
       <div class="works-stage" id="worksStage">
-      <span class="section-no" aria-hidden="true">06</span>
+      <span class="section-no" aria-hidden="true">03</span>
       <div class="sec-head">
         <div>
           <h2 class="reveal">精选作品 <span class="arr">↘</span></h2>
@@ -3045,7 +3112,7 @@
       </div>
     </section>
 
-    <!-- 06 / Summary -->
+    <!-- 07 / Summary -->
     <section class="block" id="summary">
       <span class="section-no" aria-hidden="true">07</span>
       <div class="summary-shell reveal cursor-edge-glow"><span class="edge-light" aria-hidden="true"></span>
@@ -3109,12 +3176,19 @@
     const $ = (s, r = document) => r.querySelector(s);
     const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-    /* Local V10 editor live-preview bridge. */
+    /* V11 chapter order: cases and works immediately follow the opening poster. */
+    const v11Main = $('main#top');
+    ['hero','cases','works','about','hybrid','ai-video','summary'].forEach(id => {
+      const section = document.getElementById(id);
+      if (section) v11Main.appendChild(section);
+    });
+
+    /* Local V11 editor live-preview bridge. */
     window.addEventListener('message', event => {
       const data = event.data || {};
-      if (data.type === 'v10-preview-clear') return location.reload();
-      if (data.type === 'v10-preview-focus') return document.querySelector(data.hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      if (data.type !== 'v10-preview-media' || !data.path || !data.url) return;
+      if (data.type === 'v11-preview-clear') return location.reload();
+      if (data.type === 'v11-preview-focus') return document.querySelector(data.hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (data.type !== 'v11-preview-media' || !data.path || !data.url) return;
       const normalized = value => { try { return decodeURIComponent(new URL(value, location.href).pathname).replace(/^\/+/, '').replace(/\\/g, '/'); } catch { return String(value).replace(/^\.\//, '').replace(/\\/g, '/'); } };
       const targetPath = data.path.replace(/\\/g, '/');
       $$('img,video,source').forEach(node => {
@@ -3133,7 +3207,7 @@
       try { mediaPath = decodeURIComponent(new URL(source, location.href).pathname).replace(/^\/+/, ''); } catch {}
       const assetIndex = mediaPath.indexOf('assets-v8/');
       if (assetIndex < 0) return;
-      window.parent.postMessage({ type: 'v10-select-media', path: mediaPath.slice(assetIndex) }, '*');
+      window.parent.postMessage({ type: 'v11-select-media', path: mediaPath.slice(assetIndex) }, '*');
     }, { capture: true, passive: true });
 
     /* Animated pixel wave for the AI video workflow */
@@ -3205,12 +3279,12 @@
 
     /* Option wheel — numbered page jump */
     const WHEEL_PAGES = [
-      { id: 'hero', no: '01', label: '主页' },
-      { id: 'about', no: '02', label: '个人优势' },
-      { id: 'hybrid', no: '03', label: '3D + AIGC' },
-      { id: 'cases', no: '04', label: '案例' },
-      { id: 'ai-video', no: '05', label: 'AI 广告视频' },
-      { id: 'works', no: '06', label: '精选作品' },
+      { id: 'hero', no: '01', label: '首页海报' },
+      { id: 'cases', no: '02', label: '案例展示' },
+      { id: 'works', no: '03', label: '静态作品' },
+      { id: 'about', no: '04', label: '个人优势' },
+      { id: 'hybrid', no: '05', label: '3D + AIGC' },
+      { id: 'ai-video', no: '06', label: 'AI 视频 TVC' },
       { id: 'summary', no: '07', label: '全文总结' }
     ];
     (function initOptionWheel() {
@@ -3374,31 +3448,41 @@
       applyTarget(0, true);
     })();
 
-    /* Hero videos — smoother crossfade */
+    /* V11 opening archive + TVC crossfade */
     const frames = $$('.hero-frame');
-    const videos = $$('.hero-video');
     const hbtns = $$('[data-hero]');
+    const heroWorks = [...(window.PORTFOLIO_DATA?.aiProducts || []), ...(window.PORTFOLIO_DATA?.renderProducts || [])]
+      .flatMap(project => (project.images || []).map(image => image.src)).filter(Boolean);
+    const heroWallGrid = $('#heroWallGrid');
+    if (heroWallGrid && heroWorks.length) {
+      const columns = Array.from({length:10}, () => []);
+      [...heroWorks, ...heroWorks].forEach((src,index) => columns[index % columns.length].push(src));
+      heroWallGrid.innerHTML = columns.map((items,columnIndex) => `<div class="hero-wall-column" aria-hidden="${columnIndex ? 'true' : 'false'}">${items.map(src => `<figure class="hero-wall-card"><img src="${src}" alt="" loading="${columnIndex ? 'lazy' : 'eager'}"></figure>`).join('')}</div>`).join('');
+    }
     let active = -1, hTimer;
     function showHero(i, restart = true) {
-      i = (i + videos.length) % videos.length;
+      i = (i + frames.length) % frames.length;
       if (i === active && frames[i].classList.contains('is-active') && !restart) return;
       const prev = active;
-      const v = videos[i];
+      const frame = frames[i], v = frame.querySelector('video');
       clearTimeout(hTimer);
-      if (restart) { try { v.currentTime = 0; } catch (e) {} }
-      v.muted = true;
-      v.play()?.catch(() => {});
-      frames[i].classList.add('is-active');
+      if (v) {
+        if (restart) { try { v.currentTime = 0; } catch (e) {} }
+        v.muted = true;
+        v.play()?.catch(() => {});
+      }
+      frame.classList.add('is-active');
       hbtns.forEach((b, n) => b.classList.toggle('is-active', n === i));
       const heroIndex = $('.hero-index');
-      if (heroIndex) heroIndex.textContent = `[ ${String(i + 1).padStart(2, '0')} / ${String(videos.length).padStart(2, '0')} ]`;
+      if (heroIndex) heroIndex.textContent = `[ ${String(i + 1).padStart(2, '0')} / ${String(frames.length).padStart(2, '0')} ]`;
       active = i;
       if (prev >= 0 && prev !== i) {
         frames[prev].classList.remove('is-active');
-        hTimer = setTimeout(() => videos[prev].pause(), 1100);
+        const previousVideo = frames[prev].querySelector('video');
+        if (previousVideo) hTimer = setTimeout(() => previousVideo.pause(), 1100);
       }
     }
-    videos.forEach((v, i) => v.addEventListener('ended', () => { if (i === active) showHero(i + 1); }));
+    frames.forEach((frame, i) => frame.querySelector('video')?.addEventListener('ended', () => { if (i === active) showHero(i + 1); }));
     hbtns.forEach(b => b.addEventListener('click', () => showHero(+b.dataset.hero)));
     showHero(0, false);
 
@@ -3636,8 +3720,9 @@
     const casesSection = $('#cases');
     if (casesSection) {
       const heading = $('.sec-head h2', casesSection), subtitle = $('.sec-head .sub', casesSection);
-      if (heading && caseMeta.title) heading.innerHTML = `${caseMeta.title} <span class="arr">↘</span>`;
-      if (subtitle && caseMeta.subtitle) subtitle.textContent = caseMeta.subtitle;
+      /* V11 follows the approved V13 chapter title instead of legacy editor metadata. */
+      if (heading && false && caseMeta.title) heading.innerHTML = `${caseMeta.title} <span class="arr">↘</span>`;
+      if (subtitle && false && caseMeta.subtitle) subtitle.textContent = caseMeta.subtitle;
       const workflowArticles = $$('.process-case', casesSection);
       (caseData.workflows || []).forEach((workflow, workflowIndex) => {
         const article = workflowArticles[workflowIndex]; if (!article) return;
@@ -3654,8 +3739,8 @@
         });
       });
       const compareHeading = $('.multi-compare-head h4', casesSection), compareDescription = $('.multi-compare-head p', casesSection);
-      if (compareHeading) compareHeading.textContent = caseMeta.compareTitle || 'AI 合成对比';
-      if (compareDescription && caseMeta.compareDescription) compareDescription.textContent = caseMeta.compareDescription;
+      if (compareHeading) compareHeading.textContent = '我用AI能做什么';
+      if (compareDescription) compareDescription.textContent = '切换模式，拖动分割线查看变化。';
       const modesWrap = $('.compare-modes', casesSection);
       if (modesWrap) {
         modesWrap.innerHTML = (caseData.comparisons || []).map((item, index) =>
@@ -3664,18 +3749,25 @@
       }
     }
     const compareModes = Object.fromEntries((caseData.comparisons || []).map(item => [item.id, item]));
-    function applyCompareMode(key) {
-      const mode = compareModes[key];
-      if (!mode) return;
-      $('#compareBeforeImg').src = mode.before || '';
-      $('#compareAfterImg').src = mode.after || '';
-      $('#compareBeforeLabel').textContent = mode.beforeLabel;
-      $('#compareAfterLabel').textContent = mode.afterLabel;
+    const getCompareVariants = mode => mode?.variants?.length ? mode.variants : [{
+      id:'default', title:'方案 01', before:mode?.before||'', after:mode?.after||'', reference:mode?.reference||'',
+      beforeLabel:mode?.beforeLabel||'输入', afterLabel:mode?.afterLabel||'结果', recipe:mode?.recipe||[]
+    }];
+    let activeCompareMode = Object.keys(compareModes)[0] || '';
+    function applyCompareVariant(modeKey, variantId) {
+      const mode = compareModes[modeKey];
+      const variant = getCompareVariants(mode).find(item => item.id === variantId) || getCompareVariants(mode)[0];
+      if (!mode || !variant) return;
+      const beforeImg = $('#compareBeforeImg'), afterImg = $('#compareAfterImg');
+      variant.before ? beforeImg.src = variant.before : beforeImg.removeAttribute('src');
+      variant.after ? afterImg.src = variant.after : afterImg.removeAttribute('src');
+      $('#compareBeforeLabel').textContent = variant.beforeLabel || '输入';
+      $('#compareAfterLabel').textContent = variant.afterLabel || '结果';
       const stage = $('#compareStage');
       const refBox = $('#compareRef'), refImg = $('#compareRefImg');
       if (refBox && refImg) {
-        if (mode.reference) {
-          refImg.src = mode.reference;
+        if (variant.reference) {
+          refImg.src = variant.reference;
           refBox.hidden = false;
           stage?.classList.add('has-ref');
         } else {
@@ -3684,13 +3776,24 @@
           stage?.classList.remove('has-ref');
         }
       }
-      $('#compareRecipe').innerHTML = mode.recipe.map((item, i) => `${i ? '<b>→</b>' : ''}<span>${item}</span>`).join('');
+      $('#compareRecipe').innerHTML = (variant.recipe || []).map((item, i) => `${i ? '<b>→</b>' : ''}<span>${item}</span>`).join('');
       $('#compareBefore').style.clipPath = 'inset(0 50% 0 0)';
       $('#compareDivider').style.left = $('#compareHandle').style.left = '50%';
+      $$('[data-compare-variant]').forEach(button => button.classList.toggle('is-active', button.dataset.compareVariant === variant.id));
+    }
+    function applyCompareMode(key) {
+      const mode = compareModes[key];
+      if (!mode) return;
+      activeCompareMode = key;
+      $$('[data-compare-mode]').forEach(button => button.classList.toggle('is-active', button.dataset.compareMode === key));
+      const variants = getCompareVariants(mode), variantsWrap = $('#compareVariants');
+      variantsWrap.classList.add('is-switching');
+      variantsWrap.innerHTML = variants.map((item,index) => `<button class="compare-variant${index===0?' is-active':''}" data-compare-variant="${item.id}" data-index="${String(index+1).padStart(2,'0')}" type="button">${item.title}</button>`).join('');
+      requestAnimationFrame(() => variantsWrap.classList.remove('is-switching'));
+      $$('[data-compare-variant]').forEach(button => button.addEventListener('click', () => applyCompareVariant(activeCompareMode, button.dataset.compareVariant)));
+      applyCompareVariant(key, variants[0]?.id);
     }
     $$('[data-compare-mode]').forEach(btn => btn.addEventListener('click', () => {
-      $$('[data-compare-mode]').forEach(x => x.classList.remove('is-active'));
-      btn.classList.add('is-active');
       applyCompareMode(btn.dataset.compareMode);
     }));
     /* 首屏直接显示用户保存的第一组对比素材，不再依赖点击触发刷新。 */
@@ -4086,15 +4189,23 @@
       card.addEventListener('pointerleave', () => card.style.setProperty('--edge-proximity', '0'));
     });
 
-    /* One long-form TVC preview — replace this single source from the asset editor. */
-    const adPlayer = $('#adVideoPlayer');
-    let adVideoInView = false, adVideoUserPaused = false;
-    adPlayer.addEventListener('pause',()=>{if(adVideoInView&&!adPlayer.ended) adVideoUserPaused=true});
-    adPlayer.addEventListener('play',()=>adVideoUserPaused=false);
-    new IntersectionObserver(entries=>entries.forEach(entry=>{
-      adVideoInView=entry.isIntersecting&&entry.intersectionRatio>.45;
-      if(adVideoInView&&!adVideoUserPaused) adPlayer.play().catch(()=>{}); else if(!adVideoInView) adPlayer.pause();
-    }),{threshold:[0,.45,.75]}).observe($('#adVideoShowcase'));
+    /* Product TVC + IP TVC previews — each source can be replaced independently. */
+    [
+      ['#adVideoPlayer', '#adVideoShowcase'],
+      ['#adIpPlayer', '#adIpShowcase']
+    ].forEach(([playerSelector, showcaseSelector]) => {
+      const player = $(playerSelector);
+      const showcase = $(showcaseSelector);
+      if (!player || !showcase) return;
+      let inView = false, userPaused = false;
+      player.addEventListener('pause', () => { if (inView && !player.ended) userPaused = true; });
+      player.addEventListener('play', () => { userPaused = false; });
+      new IntersectionObserver(entries => entries.forEach(entry => {
+        inView = entry.isIntersecting && entry.intersectionRatio > .45;
+        if (inView && !userPaused) player.play().catch(() => {});
+        else if (!inView) player.pause();
+      }), { threshold: [0, .45, .75] }).observe(showcase);
+    });
 
     /* Reveal + counters + nav */
     const revealObs = new IntersectionObserver(entries => {
@@ -4201,7 +4312,7 @@
 
     const navWrap = $('#navWrap');
     const progress = $('#progress');
-    const sections = ['about', 'hybrid', 'cases', 'ai-video', 'works', 'summary']
+    const sections = ['cases', 'works', 'about', 'hybrid', 'ai-video', 'summary']
       .map(id => document.getElementById(id)).filter(Boolean);
     let lastY = 0, hidden = false, ticking = false;
 
@@ -4735,8 +4846,8 @@ void main(){
       }
 
       const chapters = [
-        ['hero','01'],['about','02'],['hybrid','03'],['cases','04'],
-        ['ai-video','05'],['works','06'],['summary','07']
+        ['hero','01'],['cases','02'],['works','03'],['about','04'],
+        ['hybrid','05'],['ai-video','06'],['summary','07']
       ];
       const rail = document.createElement('nav');
       rail.className = 'v9-chapter-rail';

@@ -411,6 +411,11 @@ window.PORTFOLIO_DATA = {
           "src": "assets-v8/05-works/projects/renderProducts/render-dehumidifier/image-1787024300451-jn08o.png",
           "title": "电子仪器",
           "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/renderProducts/render-dehumidifier/image-1787533151215-1iak1.png",
+          "title": "电子仪器",
+          "ratio": "auto"
         }
       ]
     },
@@ -460,7 +465,12 @@ window.PORTFOLIO_DATA = {
           "ratio": "auto"
         },
         {
-          "src": "assets-v8/05-works/projects/renderProducts/render-walker/image-1787032552277-m1zkh.png",
+          "src": "assets-v8/05-works/projects/renderProducts/render-walker/image-1787565052214-t42e4.png",
+          "title": "婴童用品",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/renderProducts/render-walker/image-1787580461383-11tvw.png",
           "title": "婴童用品",
           "ratio": "auto"
         }
@@ -505,6 +515,11 @@ window.PORTFOLIO_DATA = {
         },
         {
           "src": "assets-v8/05-works/projects/renderProducts/render-net/image-1786982084874-08xmp.png",
+          "title": "化妆品",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/renderProducts/render-net/image-1787580388926-svd6l.png",
           "title": "化妆品",
           "ratio": "auto"
         }
@@ -626,6 +641,50 @@ window.PORTFOLIO_DATA = {
         "白模场景",
         "产品渲染",
         "最终合成效果图"
+      ],
+      "variants": [
+        {
+          "id": "default",
+          "title": "学步车温馨室内",
+          "before": "assets-v8/03-cases/editor/comparison-scene/before-1786636305495-hv5l4.png",
+          "after": "assets-v8/03-cases/editor/comparison-scene/after-1786636310271-uweqw.png",
+          "reference": "",
+          "beforeLabel": "白模场景",
+          "afterLabel": "最终合成",
+          "recipe": [
+            "白模场景",
+            "产品渲染",
+            "最终合成效果图"
+          ]
+        },
+        {
+          "id": "option-02",
+          "title": "冰箱融合",
+          "before": "assets-v8/03-cases/editor/comparison-scene-option-02/before-1787539100618-ezsid.png",
+          "after": "assets-v8/03-cases/editor/comparison-scene-option-02/after-1787542100474-b37gj.png",
+          "reference": "",
+          "beforeLabel": "渲染图+白膜",
+          "afterLabel": "AI合成",
+          "recipe": [
+            "输入",
+            "处理",
+            "结果"
+          ]
+        },
+        {
+          "id": "option-03",
+          "title": "方案 03",
+          "before": "assets-v8/03-cases/editor/comparison-scene-option-03/before-1787621589646-b1n4h.png",
+          "after": "assets-v8/03-cases/editor/comparison-scene-option-03/after-1787621595916-sv42d.png",
+          "reference": "",
+          "beforeLabel": "输入",
+          "afterLabel": "结果",
+          "recipe": [
+            "输入",
+            "处理",
+            "结果"
+          ]
+        }
       ]
     },
     {
@@ -639,6 +698,36 @@ window.PORTFOLIO_DATA = {
         "产品渲染图",
         "参考背景",
         "商业场景效果图"
+      ],
+      "variants": [
+        {
+          "id": "default",
+          "title": "吸尘器室内",
+          "before": "assets-v8/03-cases/editor/comparison-background/before-1786636359993-bb5la.png",
+          "after": "assets-v8/03-cases/editor/comparison-background/after-1786636364768-jy39v.png",
+          "reference": "",
+          "beforeLabel": "产品渲染图",
+          "afterLabel": "背景合成",
+          "recipe": [
+            "产品渲染图",
+            "参考背景",
+            "商业场景效果图"
+          ]
+        },
+        {
+          "id": "option-02",
+          "title": "扫地机器人室内",
+          "before": "assets-v8/03-cases/editor/comparison-background-option-02/before-1787320978641-nctgj.png",
+          "after": "assets-v8/03-cases/editor/comparison-background-option-02/after-1787320981401-wv1xf.png",
+          "reference": "",
+          "beforeLabel": "白底",
+          "afterLabel": "AI合成",
+          "recipe": [
+            "输入",
+            "处理",
+            "结果"
+          ]
+        }
       ]
     },
     {
@@ -652,11 +741,67 @@ window.PORTFOLIO_DATA = {
         "拍摄图片",
         "AI 精修",
         "提示词生成场景图"
+      ],
+      "variants": [
+        {
+          "id": "default",
+          "title": "背包",
+          "before": "assets-v8/03-cases/editor/comparison-photo/before-1786685637416-shrtw.png",
+          "after": "assets-v8/03-cases/editor/comparison-photo/after-1786689050146-mfszk.jpg",
+          "reference": "",
+          "beforeLabel": "拍摄原图",
+          "afterLabel": "AI 场景图",
+          "recipe": [
+            "拍摄图片",
+            "AI 精修"
+          ]
+        },
+        {
+          "id": "option-02",
+          "title": "提包",
+          "before": "assets-v8/03-cases/editor/comparison-photo-option-02/before-1787302113815-fmima.png",
+          "after": "assets-v8/03-cases/editor/comparison-photo-option-02/after-1787320600417-vyi94.jpg",
+          "reference": "",
+          "beforeLabel": "原图",
+          "afterLabel": "精修",
+          "recipe": [
+            "原图",
+            "精修"
+          ]
+        },
+        {
+          "id": "option-03",
+          "title": "手柄",
+          "before": "assets-v8/03-cases/editor/comparison-photo-option-03/before-1787566615373-ngd69.png",
+          "after": "assets-v8/03-cases/editor/comparison-photo-option-03/after-1787566618864-rvhec.jpg",
+          "reference": "",
+          "beforeLabel": "原图",
+          "afterLabel": "精修",
+          "recipe": [
+            "输入",
+            "处理",
+            "结果"
+          ]
+        },
+        {
+          "id": "option-04",
+          "title": "烧水壶",
+          "before": "assets-v8/03-cases/editor/comparison-photo-option-04/before-1787621353912-9iqs4.png",
+          "after": "assets-v8/03-cases/editor/comparison-photo-option-04/after-1787621361064-7p0hi.jpg",
+          "reference": "",
+          "beforeLabel": "原图",
+          "afterLabel": "精修",
+          "recipe": [
+            "输入",
+            "处理",
+            "结果"
+          ]
+        }
       ]
     },
     {
       "id": "cmp-04",
-      "title": "04 材质替换",
+      "title": "04 AI材质替换",
       "before": "assets-v8/03-cases/editor/comparison-cmp-04/before-1787057700095-s0ecp.png",
       "after": "assets-v8/03-cases/editor/comparison-cmp-04/after-1787057703612-3oi63.png",
       "beforeLabel": "原材质",
@@ -666,7 +811,37 @@ window.PORTFOLIO_DATA = {
         "上传颜色分区图+原模型图+ 材质参考图",
         "AI参考颜色分割和材质图进行合成"
       ],
-      "reference": "assets-v8/03-cases/editor/comparison-cmp-04/reference-1787058368948-zmcdo.png"
+      "reference": "assets-v8/03-cases/editor/comparison-cmp-04/reference-1787058368948-zmcdo.png",
+      "variants": [
+        {
+          "id": "default",
+          "title": "安全座椅 精确控图改材质",
+          "before": "assets-v8/03-cases/editor/comparison-cmp-04/before-1787057700095-s0ecp.png",
+          "after": "assets-v8/03-cases/editor/comparison-cmp-04/after-1787057703612-3oi63.png",
+          "reference": "assets-v8/03-cases/editor/comparison-cmp-04/reference-1787058368948-zmcdo.png",
+          "beforeLabel": "原材质",
+          "afterLabel": "新材质",
+          "recipe": [
+            "模型颜色分割",
+            "上传颜色分区图+原模型图+ 材质参考图",
+            "AI参考颜色分割和材质图进行合成"
+          ]
+        },
+        {
+          "id": "option-02",
+          "title": "AI制作材质贴图",
+          "before": "assets-v8/03-cases/editor/comparison-cmp-04-option-02/before-1787621468526-xkig1.png",
+          "after": "assets-v8/03-cases/editor/comparison-cmp-04-option-02/after-1787621471821-vig2w.png",
+          "reference": "",
+          "beforeLabel": "原图",
+          "afterLabel": "AI材质生成",
+          "recipe": [
+            "输入",
+            "处理",
+            "结果"
+          ]
+        }
+      ]
     }
   ]
 };
