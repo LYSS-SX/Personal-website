@@ -502,31 +502,31 @@
       padding: 0 var(--pad-x);
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 28px;
+      gap: 10px;
       position: relative;
+    }
+    .hybrid-shell > .engine-card:first-of-type {
+      -webkit-mask-image: radial-gradient(circle 58px at 100% 210px, transparent 57px, #000 58px);
+      mask-image: radial-gradient(circle 58px at 100% 210px, transparent 57px, #000 58px);
+    }
+    .hybrid-shell > .engine-card:nth-of-type(2) {
+      -webkit-mask-image: radial-gradient(circle 58px at 0 210px, transparent 57px, #000 58px);
+      mask-image: radial-gradient(circle 58px at 0 210px, transparent 57px, #000 58px);
     }
     .hybrid-flow-mark {
       position: absolute; z-index: 5; left: 50%; top: 210px;
-      width: 108px; height: 108px; transform: translate(-50%, -50%);
-      display: grid; place-items: center; border-radius: 50%;
-      background: radial-gradient(circle at 42% 36%, rgba(24,43,70,.96), rgba(7,11,18,.98) 68%);
-      border: 1px solid rgba(70,174,255,.48);
-      box-shadow: 0 0 0 8px rgba(0,0,0,.42), 0 0 34px rgba(0,117,255,.28), inset 0 0 24px rgba(67,179,255,.12);
-      pointer-events: none;
+      width: 94px; height: 68px; transform: translate(-50%, -50%);
+      display: grid; place-items: center; pointer-events: none;
+      filter: drop-shadow(0 0 13px rgba(41,151,255,.36));
     }
-    .hybrid-flow-mark::before {
-      content: ""; position: absolute; inset: -14px; border-radius: inherit;
-      border: 1px solid rgba(41,151,255,.12); animation: hybridHalo 2.8s ease-in-out infinite;
-    }
-    .hybrid-flow-mark svg { width: 76px; height: 50px; overflow: visible; }
-    .hybrid-flow-mark .flow-base { fill: none; stroke: rgba(116,143,178,.42); stroke-width: 5; stroke-linecap: round; }
+    .hybrid-flow-mark svg { width: 88px; height: 58px; overflow: visible; }
+    .hybrid-flow-mark .flow-base { fill: none; stroke: rgba(116,143,178,.38); stroke-width: 6; stroke-linecap: round; }
     .hybrid-flow-mark .flow-energy {
       fill: none; stroke: url(#hybridFlowGradient); stroke-width: 8;
       stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 16 84;
       animation: hybridFlow 2.8s linear infinite;
     }
     @keyframes hybridFlow { to { stroke-dashoffset: -100; } }
-    @keyframes hybridHalo { 50% { transform: scale(1.08); opacity: .35; } }
     .engine-card {
       padding: clamp(32px, 3.5vw, 48px);
       background: var(--bg-elevated);
@@ -1188,6 +1188,8 @@
       .strength-model, .strength-render, .strength-aigc, .strength-ready { grid-column: 1; }
       .hybrid-shell { grid-template-columns: 1fr; }
       .hybrid-flow-mark { display: none; }
+      .hybrid-shell > .engine-card:first-of-type,
+      .hybrid-shell > .engine-card:nth-of-type(2) { -webkit-mask-image: none; mask-image: none; }
       .dual-tv-row { grid-template-columns: 1fr; }
       .summary-top { grid-template-columns: 1fr; }
       .summary-profile { display: flex; align-items: center; gap: 20px; text-align: left; }
