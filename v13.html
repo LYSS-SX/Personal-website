@@ -2122,7 +2122,12 @@
 
     /* ─── Portfolio Data ─── */
     const portfolioData = window.PORTFOLIO_DATA || { aiProducts: [], renderProducts: [] };
-    const thumbSrc = src => src;
+    const thumbSrc = (src, size = 'm') => {
+      if (!src || !src.startsWith('assets-v8/05-works/projects/')) return src;
+      return src
+        .replace('assets-v8/05-works/projects/', `assets-v8/05-works/thumbs/${size}/`)
+        .replace(/\.[^./]+$/, '.jpg');
+    };
     const galleryItems = [];
     const folderDefs = { aiProducts: (portfolioData.aiProducts || []).slice(0, 6), renderProducts: (portfolioData.renderProducts || []).slice(0, 5) };
     Object.values(folderDefs).flat().forEach(folder => {

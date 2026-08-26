@@ -26,16 +26,6 @@ window.PORTFOLIO_DATA = {
           "ratio": "auto"
         },
         {
-          "src": "assets-v8/05-works/projects/aiProducts/ai-01/image-1786625577694-a0lkm.jpg",
-          "title": "3C电子",
-          "ratio": "auto"
-        },
-        {
-          "src": "assets-v8/05-works/projects/aiProducts/ai-01/image-1786625603057-ntnzx.jpg",
-          "title": "3C电子",
-          "ratio": "auto"
-        },
-        {
           "src": "assets-v8/05-works/projects/aiProducts/ai-01/image-1786703660616-qf9si.jpg",
           "title": "3C电子",
           "ratio": "auto"
@@ -66,12 +56,37 @@ window.PORTFOLIO_DATA = {
           "ratio": "auto"
         },
         {
-          "src": "assets-v8/05-works/projects/aiProducts/ai-01/image-1786974438011-knaby.jpg",
+          "src": "assets-v8/05-works/projects/aiProducts/ai-01/image-1786974814972-2hx0f.jpg",
           "title": "3C电子",
           "ratio": "auto"
         },
         {
-          "src": "assets-v8/05-works/projects/aiProducts/ai-01/image-1786974814972-2hx0f.jpg",
+          "src": "assets-v8/05-works/projects/aiProducts/ai-01/image-1787726200392-ma0j2.jpg",
+          "title": "3C电子",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-01/image-1787728149587-hzdnf.png",
+          "title": "3C电子",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-01/image-1787728575666-hm9h5.jpg",
+          "title": "3C电子",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-01/image-1787728607227-uxt32.jpg",
+          "title": "3C电子",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-01/image-1787729558197-eng9q.jpg",
+          "title": "3C电子",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-01/image-1787729695274-5jh4l.jpg",
           "title": "3C电子",
           "ratio": "auto"
         }
@@ -109,11 +124,6 @@ window.PORTFOLIO_DATA = {
         },
         {
           "src": "assets-v8/05-works/projects/aiProducts/ai-02/image-1786971148855-cb51z.png",
-          "title": "生活厨电",
-          "ratio": "auto"
-        },
-        {
-          "src": "assets-v8/05-works/projects/aiProducts/ai-02/image-1786972364697-m1e3a.jpg",
           "title": "生活厨电",
           "ratio": "auto"
         },
@@ -245,6 +255,31 @@ window.PORTFOLIO_DATA = {
           "src": "assets-v8/05-works/projects/aiProducts/ai-06/image-1787648464234-d4dok.png",
           "title": "儿童用品",
           "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-06/image-1787726869047-nozte.jpg",
+          "title": "儿童用品",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-06/image-1787726918276-fnx3r.png",
+          "title": "儿童用品",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-06/image-1787726959079-nrboq.jpg",
+          "title": "儿童用品",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-06/image-1787728535418-978m2.jpg",
+          "title": "儿童用品",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-06/image-1787730238901-s3p8h.jpg",
+          "title": "儿童用品",
+          "ratio": "auto"
         }
       ]
     },
@@ -299,11 +334,6 @@ window.PORTFOLIO_DATA = {
           "ratio": "auto"
         },
         {
-          "src": "assets-v8/05-works/projects/aiProducts/ai-04/image-1787030958062-ck72q.jpg",
-          "title": "户外装备",
-          "ratio": "auto"
-        },
-        {
           "src": "assets-v8/05-works/projects/aiProducts/ai-04/image-1787030981877-o8l4g.jpg",
           "title": "户外装备",
           "ratio": "auto"
@@ -324,11 +354,6 @@ window.PORTFOLIO_DATA = {
           "ratio": "auto"
         },
         {
-          "src": "assets-v8/05-works/projects/aiProducts/ai-04/image-1787654966119-qrjph.jpg",
-          "title": "户外装备",
-          "ratio": "auto"
-        },
-        {
           "src": "assets-v8/05-works/projects/aiProducts/ai-04/image-1787654966323-zuu4z.jpg",
           "title": "户外装备",
           "ratio": "auto"
@@ -345,6 +370,21 @@ window.PORTFOLIO_DATA = {
         },
         {
           "src": "assets-v8/05-works/projects/aiProducts/ai-04/image-1787654966357-otma5.jpg",
+          "title": "户外装备",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-04/image-1787728000771-ggl2x.png",
+          "title": "户外装备",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-04/image-1787729786682-17sxo.png",
+          "title": "户外装备",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-04/image-1787729786801-ith88.png",
           "title": "户外装备",
           "ratio": "auto"
         }
@@ -387,6 +427,16 @@ window.PORTFOLIO_DATA = {
         },
         {
           "src": "assets-v8/05-works/projects/aiProducts/ai-05/image-1786982935918-ily4q.jpg",
+          "title": "化妆品",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-05/image-1787728487775-2wlwv.jpg",
+          "title": "化妆品",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/aiProducts/ai-05/image-1787728510940-4opj9.jpg",
           "title": "化妆品",
           "ratio": "auto"
         }
@@ -470,7 +520,32 @@ window.PORTFOLIO_DATA = {
           "ratio": "auto"
         },
         {
-          "src": "assets-v8/05-works/projects/renderProducts/render-dehumidifier/image-1787533151215-1iak1.png",
+          "src": "assets-v8/05-works/projects/renderProducts/render-dehumidifier/image-1787722789625-rimcm.png",
+          "title": "电子仪器",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/renderProducts/render-dehumidifier/image-1787725454604-t2eu4.jpg",
+          "title": "电子仪器",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/renderProducts/render-dehumidifier/image-1787725492392-e4w9r.png",
+          "title": "电子仪器",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/renderProducts/render-dehumidifier/image-1787725942784-c5m1o.png",
+          "title": "电子仪器",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/renderProducts/render-dehumidifier/image-1787726600385-jbelj.jpg",
+          "title": "电子仪器",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/renderProducts/render-dehumidifier/image-1787730412259-4kq9g.png",
           "title": "电子仪器",
           "ratio": "auto"
         }
@@ -557,6 +632,11 @@ window.PORTFOLIO_DATA = {
           "src": "assets-v8/05-works/projects/renderProducts/render-scooter/image-1786955403911-64kt4.png",
           "title": "家居清洁",
           "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/renderProducts/render-scooter/image-1787666681365-8bt8r.png",
+          "title": "家居清洁",
+          "ratio": "auto"
         }
       ]
     },
@@ -604,6 +684,11 @@ window.PORTFOLIO_DATA = {
         },
         {
           "src": "assets-v8/05-works/projects/renderProducts/render-flowmeter/image-1786981778702-wx9uc.png",
+          "title": "3C类",
+          "ratio": "auto"
+        },
+        {
+          "src": "assets-v8/05-works/projects/renderProducts/render-flowmeter/image-1787737275141-b3qgj.png",
           "title": "3C类",
           "ratio": "auto"
         }
