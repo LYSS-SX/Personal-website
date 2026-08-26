@@ -283,7 +283,7 @@
       width: 100%;
     }
     .hero-reels {
-      display: flex; gap: 12px; margin-bottom: 48px;
+      display: flex; gap: 12px; margin: 0 0 48px -32px;
       flex-wrap: wrap;
     }
     .hero-reels button {
@@ -1180,7 +1180,7 @@
 
     @media (max-width: 720px) {
       :root { --pad-x: 16px; --pad-y: 60px; }
-      .hero-reels { flex-direction: column; }
+      .hero-reels { flex-direction: column; margin-left: 0; }
       .hero-reels button { min-width: 0; width: 100%; }
       .hero-content h1 { font-size: clamp(36px, 10vw, 48px); }
       .hero-content p { font-size: 17px; }
