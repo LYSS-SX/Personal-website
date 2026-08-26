@@ -283,7 +283,7 @@
       width: 100%;
     }
     .hero-reels {
-      display: flex; gap: 12px; margin: 0 0 48px -32px;
+      display: flex; gap: 12px; margin-bottom: 48px;
       flex-wrap: wrap;
     }
     .hero-reels button {
@@ -314,14 +314,6 @@
       max-width: 720px;
       position: relative;
       z-index: 4;
-    }
-    .hero-content::before {
-      content: "";
-      position: absolute; z-index: -1;
-      inset: -24px -32px;
-      background: radial-gradient(ellipse 120% 100% at 0% 50%, rgba(0,0,0,0.55) 0%, transparent 72%);
-      border-radius: var(--radius-lg);
-      pointer-events: none;
     }
     .hero-content .kicker {
       font-size: 14px; color: var(--accent);
@@ -1180,7 +1172,7 @@
 
     @media (max-width: 720px) {
       :root { --pad-x: 16px; --pad-y: 60px; }
-      .hero-reels { flex-direction: column; margin-left: 0; }
+      .hero-reels { flex-direction: column; }
       .hero-reels button { min-width: 0; width: 100%; }
       .hero-content h1 { font-size: clamp(36px, 10vw, 48px); }
       .hero-content p { font-size: 17px; }
