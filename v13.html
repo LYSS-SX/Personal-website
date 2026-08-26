@@ -529,12 +529,12 @@
     .engine-card:hover { transform: translateY(-4px); }
     .engine-card.ai-tools {
       grid-column: 1 / -1;
-      width: min(100%, 820px);
-      justify-self: center;
-      padding: clamp(28px, 3vw, 38px) clamp(30px, 3.4vw, 44px);
+      width: 100%;
+      padding: clamp(28px, 3vw, 38px) clamp(32px, 3.6vw, 48px);
       background: linear-gradient(135deg, #1d1d1f, #2c2c2e);
     }
-    .engine-card.ai-tools .engine-subblock { margin-top: 18px; padding-top: 16px; }
+    .engine-tools-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 48px; }
+    .engine-card.ai-tools .engine-subblock { margin-top: 16px; padding-top: 14px; }
     .engine-tag {
       display: block;
       font-size: 11px; color: var(--accent);
@@ -1183,6 +1183,7 @@
       .strength-model, .strength-render, .strength-aigc, .strength-ready { grid-column: 1; }
       .hybrid-shell { grid-template-columns: 1fr; }
       .hybrid-flow-mark { display: none; }
+      .engine-tools-grid { column-gap: 32px; }
       .dual-tv-row { grid-template-columns: 1fr; }
       .summary-top { grid-template-columns: 1fr; }
       .summary-profile { display: flex; align-items: center; gap: 20px; text-align: left; }
@@ -1191,6 +1192,7 @@
 
     @media (max-width: 720px) {
       :root { --pad-x: 16px; --pad-y: 60px; }
+      .engine-tools-grid { grid-template-columns: 1fr; }
       .hero-reels { flex-direction: column; }
       .hero-reels button { min-width: 0; width: 100%; }
       .hero-content h1 { font-size: clamp(36px, 10vw, 48px); }
@@ -1636,17 +1638,23 @@
           <span class="engine-tag">ENGINE 03 · EMERGING TOOLS</span>
           <h3>发展中的工具潜力</h3>
           <p>持续跟踪并实验前沿技术，将其逐步纳入工作流：</p>
-          <div class="engine-subblock">
-            <h4>AI 生成 3D 模型</h4>
-            <p>从文本/图像直接生成基础几何，用于快速占位或简单资产，需人工拓扑优化与细节重构。</p>
-          </div>
-          <div class="engine-subblock">
-            <h4>3D 高斯泼溅扫描</h4>
-            <p>快速获取真实物体或环境的高保真资产，提升数字内容真实感。</p>
-          </div>
-          <div class="engine-subblock">
-            <h4>AI 世界模型</h4>
-            <p>探索具备空间一致性和物理逻辑的生成式环境，为交互、影视预演提供新可能。</p>
+          <div class="engine-tools-grid">
+            <div class="engine-subblock">
+              <h4>AI 生成 3D 模型</h4>
+              <p>从文本/图像直接生成基础几何，用于快速占位或简单资产，需人工拓扑优化与细节重构。</p>
+            </div>
+            <div class="engine-subblock">
+              <h4>3D 高斯泼溅扫描</h4>
+              <p>快速获取真实物体或环境的高保真资产，提升数字内容真实感。</p>
+            </div>
+            <div class="engine-subblock">
+              <h4>AI 世界模型</h4>
+              <p>探索具备空间一致性和物理逻辑的生成式环境，为交互、影视预演提供新可能。</p>
+            </div>
+            <div class="engine-subblock">
+              <h4>AI 视频生成</h4>
+              <p>通过文本、图像或关键帧生成动态画面，快速探索镜头运动、叙事节奏与视觉效果。</p>
+            </div>
           </div>
         </article>
       </div>
