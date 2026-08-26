@@ -529,8 +529,12 @@
     .engine-card:hover { transform: translateY(-4px); }
     .engine-card.ai-tools {
       grid-column: 1 / -1;
+      width: min(100%, 820px);
+      justify-self: center;
+      padding: clamp(28px, 3vw, 38px) clamp(30px, 3.4vw, 44px);
       background: linear-gradient(135deg, #1d1d1f, #2c2c2e);
     }
+    .engine-card.ai-tools .engine-subblock { margin-top: 18px; padding-top: 16px; }
     .engine-tag {
       display: block;
       font-size: 11px; color: var(--accent);
