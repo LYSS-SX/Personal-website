@@ -676,9 +676,11 @@
       .flow-shot::after { display: none; }
     }
 
-    /* Compare — blown out, bright blue background to stand out */
+    /* Compare — restrained solid deep blue */
     .multi-compare {
-      background: linear-gradient(135deg, #0a1a3a, #0d2a5a 50%, #10366a);
+      background: #08285c;
+      border: 1px solid rgba(41, 151, 255, 0.78);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 18px 60px rgba(0,38,102,0.18);
       border-radius: var(--radius-lg);
       padding: clamp(44px, 7vw, 80px) clamp(24px, 5vw, 72px);
       margin-top: 24px;
@@ -696,6 +698,7 @@
     .multi-compare .compare-recipe span { color: rgba(255,255,255,0.8); }
     .multi-compare .compare-recipe b { color: #fff; }
     .multi-compare .compare-label { background: rgba(0,0,0,0.5); color: #fff; }
+    .case-accent { color: var(--accent); }
     .multi-compare-head {
       display: flex; justify-content: space-between; align-items: flex-end;
       gap: 24px; margin-bottom: 28px; flex-wrap: wrap;
@@ -1390,7 +1393,7 @@
     <!-- ═══ CASES ═══ -->
     <section class="block" id="cases">
       <div class="sec-head reveal">
-        <h2>精确建模 + AIGC 合成<br>能控图、能落地 <span class="arr">↘</span></h2>
+        <h2>精确建模 + <span class="case-accent">AIGC 合成</span><br><span class="case-accent">能控图、能落地</span> <span class="arr">↘</span></h2>
         <p>以传统建模流程为基础，可直接出渲染图或利用 AIGC 快速合成，<strong>降本增效</strong>同时提升创意落地的效果。</p>
       </div>
       <div class="case-system">
